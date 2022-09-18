@@ -20,7 +20,8 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Title</th>
+                                        <th scope="col">Title Part One</th>
+                                        <th scope="col">Title Part Two</th>
                                         <th scope="col">Description</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -41,8 +42,12 @@
                             <div class="card-body">
                                 {{--                    <form>--}}
                                 <div class="mb-3">
-                                    <label for="title" class="form-label">Title</label>
-                                    <input type="text" class="form-control" id="title" placeholder="Enter Title">
+                                    <label for="title_one" class="form-label">Title Part One</label>
+                                    <input type="text" class="form-control" id="title_one" placeholder="Enter Title">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="title_two" class="form-label">Title Part Two</label>
+                                    <input type="text" class="form-control" id="title_two" placeholder="Enter Title">
                                 </div>
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Description</label>
@@ -88,25 +93,40 @@
 
         function addTopContent(){
 
-           var title        = $('#title').val();
+           var title_one    = $('#title_one').val();
+           var title_two    = $('#title_two').val();
            var description  = $('#description').val();
            var status       = $('#status').val();
 
            $.ajax({
                type: "POST",
                dataType: "json",
-               data: {title:title, description:description, status:status},
+               data: {title_one:title_one,title_two:title_two, description:description, status:status},
                url: "/section-top-store",
                success: function (data){
                    clearTopContent();
                    allTopContent();
+                   // Alert
+                   const Msg = Swal.mixin({
+                       toast:'true',
+                       position: 'top-end',
+                       icon: 'success',
+                       showConfirmButton: false,
+                       timer: 1600
+                   });
+                   Msg.fire({
+                       type: 'success',
+                       title: 'Data Added Successfully'
+                   })
+                   // End Alert
                    console.log(data)
                }
            })
         }
 
         function clearTopContent(){
-          $('#title').val('');
+          $('#title_one').val('');
+          $('#title_two').val('');
           $('#description').val('');
           $('#status').val('');
         }
@@ -121,7 +141,8 @@
                     $.each(response, function (key, value){
                         data = data +"<tr>"
                         data = data + "<td>"+value.id+"</td>"
-                        data = data + "<td>"+value.title+"</td>"
+                        data = data + "<td>"+value.title_one+"</td>"
+                        data = data + "<td>"+value.title_two+"</td>"
                         data = data + "<td>"+value.description+"</td>"
                         data = data + "<td>"
                         data = data + "<button class='btn btn-info text-light m-1'> Edit</button>"

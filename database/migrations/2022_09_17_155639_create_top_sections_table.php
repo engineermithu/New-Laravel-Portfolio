@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('top_sections', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title_one');
+            $table->string('title_two');
             $table->text('description')->nullable();
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }

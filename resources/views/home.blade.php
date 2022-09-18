@@ -15,7 +15,7 @@
 {{--                            <h1 class="h1">{{__('Welcome To ')}}<span>{{__('Engineer Mithu!')}}</span></h1>--}}
 
                                 @foreach($topSections as $topSection)
-                                    <h1>{{$topSection->title}} <span>{{$topSection->description}}</span></h1>
+                                    <h1>{{$topSection->title_one}} <span>{{$topSection->title_two}}</span></h1>
                                 @endforeach
 
 

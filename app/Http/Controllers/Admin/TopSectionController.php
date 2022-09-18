@@ -25,7 +25,8 @@ class TopSectionController extends Controller
     {
        $data    = TopSection::insert([
 
-           'title'          => $request->title,
+           'title_one'      => $request->title_one,
+           'title_two'      => $request->title_two,
            'description'    => $request->description,
            'status'         => $request->status
 
