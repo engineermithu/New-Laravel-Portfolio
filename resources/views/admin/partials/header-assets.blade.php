@@ -3,6 +3,8 @@
 <link href="{{asset('/admin-assets')}}/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 <link href="{{asset('/admin-assets')}}/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
 <link href="{{asset('/admin-assets')}}/vendors/jvectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
+<link href="{{asset('/admin-assets')}}/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" />
 <!-- THEME STYLES-->
 <link href="{{asset('/admin-assets')}}/css/main.css" rel="stylesheet" />
 <link href="{{asset('/admin-assets')}}/css/main.min.css" rel="stylesheet" />

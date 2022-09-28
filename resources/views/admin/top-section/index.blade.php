@@ -23,6 +23,7 @@
                                         <th scope="col">Title Part One</th>
                                         <th scope="col">Title Part Two</th>
                                         <th scope="col">Description</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                     </thead>
@@ -53,14 +54,19 @@
                                     <label for="description" class="form-label">Description</label>
                                     <textarea id="description" class="form-control summernote" id="description" placeholder="Enter Description"></textarea>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-3"><br>
                                     <label for="status"> {{__('Status')}}  </label>
-{{--                                    <div class="form-check">--}}
-                                        <input class="form-check-input ml-3" type="radio" id="status"  name="status" value="1" />
-                                        <label class="form-check-label ml-3" for="status"> Published </label>
+                                    <label class="custom-switch mt-2">
+                                        <input type="checkbox" name="custom-switch-checkbox" value="video-quality-status/"   class= custom-switch-input">
+                                        <span class="custom-switch-indicator"></span>
+                                    </label>
 
-                                        <input class="form-check-input ml-2" type="radio" id="status"  name="status"  value="0" />
-                                        <label class="form-check-label ml-2" for="status">Unpublished</label>
+{{--                                    <div class="form-check">--}}{{--<br>--}}
+{{--                                        <input class="form-check-input ml-3" type="radio" id="status"  name="status" value="1" />--}}
+{{--                                        <label class="form-check-label ml-3" for="status"> Published </label>--}}
+
+{{--                                        <input class="form-check-input ml-2" type="radio" id="status"  name="status"  value="0" />--}}
+{{--                                        <label class="form-check-label ml-2" for="status">Unpublished</label>--}}
 {{--                                    </div>--}}
                                 </div>
                                 <input type="hidden" class="form-control" id="id" />
@@ -144,9 +150,10 @@
                         data = data + "<td>"+value.title_one+"</td>"
                         data = data + "<td>"+value.title_two+"</td>"
                         data = data + "<td>"+value.description+"</td>"
+                        data = data + "<td>"+value.status+"</td>"
                         data = data + "<td>"
-                        data = data + "<button class='btn btn-info text-light m-1'> Edit</button>"
-                        data = data + "<button class='btn btn-danger text-light m-1'> Delete</button>"
+                        data = data + "<button class='btn btn-info text-light m-1 ' ><i class='fa fa-edit'></i> </button>"
+                        data = data + "<button class='btn btn-danger text-light m-1' onclick='deleteTopContent("+value.id+")'><i class='fa fa-trash'></i> </button>"
                         data = data + "</td>"
                         data = data +"</tr>"
                     })
@@ -155,6 +162,43 @@
             })
         }
         allTopContent();
+        deleteTopContent()
+
+
+        function deleteTopContent(id){
+
+            if(id){
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                type: "delete",
+                                dataType: "json",
+                                url: "/section-top-destroy/"+id,
+                                success: function (data){
+                                    Swal.fire(
+                                        'Deleted!',
+                                        'Your file has been deleted.',
+                                        'success'
+                                    )
+                                }
+                            })
+
+                        }
+                        allTopContent();
+                    })
+            }
+        }
+
+
 
     </script>
 @endsection

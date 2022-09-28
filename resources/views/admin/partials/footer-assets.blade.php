@@ -12,9 +12,10 @@
 <script src="{{asset('/admin-assets')}}/vendors/jvectormap/jquery-jvectormap-us-aea-en.js" type="text/javascript"></script>
 <script src="{{ asset('/admin-assets') }}/vendors/summernote/dist/summernote.min.js" type="text/javascript"></script>
 <script src="{{ asset('/admin-assets/') }}/vendors/bootstrap-markdown/js/bootstrap-markdown.js" type="text/javascript"></script>
+<script src="{{ asset('/admin-assets/') }}/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Alert -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.33/sweetalert2.all.js"></script>
-
 <script type="text/javascript">
     $(function() {
         $('.summernote').summernote();

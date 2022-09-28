@@ -26,3 +26,4 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/top-section', [TopSectionController::class, 'index'])->name('top.section');
 Route::post('/section-top-store', [TopSectionController::class, 'store'])->name('store.top.section');
 Route::get('/top-section-all', [TopSectionController::class, 'show'])->name('show.top.section');
+Route::delete('/section-top-destroy/{id}', [TopSectionController::class, 'destroy'])->name('destroy.top.section');

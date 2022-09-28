@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('title_one');
             $table->string('title_two');
             $table->text('description')->nullable();
-            $table->tinyInteger('status')->nullable();
+//            $table->tinyInteger('status')->nullable();
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

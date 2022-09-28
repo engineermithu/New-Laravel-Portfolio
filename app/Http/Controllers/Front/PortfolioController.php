@@ -10,7 +10,7 @@ class PortfolioController extends Controller
 {
     public function index(){
 
-        $topSections = TopSection::all();
+        $topSections = TopSection::where('status',1)->get();
         return view('home',compact('topSections'));
     }
 }

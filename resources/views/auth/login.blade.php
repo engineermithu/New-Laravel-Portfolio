@@ -61,6 +61,7 @@
         <div class="page-preloader">Loading</div>
     </div>
     {{--<!-- END PAGA BACKDROPS-->--}}
+   
 @endsection
 
 

@@ -23,12 +23,13 @@ class TopSectionController extends Controller
 
     public function store(Request $request)
     {
+//        dd($request->all());
        $data    = TopSection::insert([
 
            'title_one'      => $request->title_one,
            'title_two'      => $request->title_two,
            'description'    => $request->description,
-           'status'         => $request->status
+//           'status'         => $request->status
 
        ]);
         return response()->json($data);
@@ -56,6 +57,13 @@ class TopSectionController extends Controller
 
     public function destroy($id)
     {
-        //
+        try {
+            $data   = TopSection::destroy($id);
+
+            return response()->json($data);
+
+        }catch (\Exception $e){
+            echo $e;
+        }
     }
 }
