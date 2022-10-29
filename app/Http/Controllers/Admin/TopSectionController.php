@@ -4,10 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\TopSection;
+use App\Repositories\Interfaces\Admin\TopSectionInterface;
 use Illuminate\Http\Request;
 
 class TopSectionController extends Controller
 {
+
+    protected $top_section;
+
+    public function __construct(TopSectionInterface $top_section){
+
+        $this->top_section = $top_section;
+    }
 
     public function index()
     {
@@ -23,47 +31,37 @@ class TopSectionController extends Controller
 
     public function store(Request $request)
     {
-//        dd($request->all());
-       $data    = TopSection::insert([
-
-           'title_one'      => $request->title_one,
-           'title_two'      => $request->title_two,
-           'description'    => $request->description,
-//           'status'         => $request->status
-
-       ]);
+        $data = $this->top_section->store($request);
         return response()->json($data);
     }
 
 
     public function show()
     {
-        $data = TopSection::all();
+        $data = $this->top_section->show();
         return response()->json($data);
     }
 
 
     public function edit($id)
     {
-        //
+        $data = $this->top_section->edit($id);
+        return response()->json($data);
+//           return view('admin.top-section.index',compact('data'));
+//        return view('admin.top-section.index',['data' =>TopSection::find($id)]);
     }
 
 
     public function update(Request $request, $id)
     {
-        //
+        $data = $this->top_section->update($request,$id);
+        return response()->json($data);
     }
 
 
     public function destroy($id)
     {
-        try {
-            $data   = TopSection::destroy($id);
-
-            return response()->json($data);
-
-        }catch (\Exception $e){
-            echo $e;
-        }
+        $data = $this->top_section->destroy($id);
+        return response()->json($data);
     }
 }

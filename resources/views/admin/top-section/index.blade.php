@@ -16,9 +16,9 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-body">
-                                <table class="table table-border">
+                                <table class="table table-bordered table-striped">
                                     <thead>
-                                    <tr>
+                                    <tr class="bg-info text-light">
                                         <th scope="col">#</th>
                                         <th scope="col">Title Part One</th>
                                         <th scope="col">Title Part Two</th>
@@ -52,27 +52,25 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Description</label>
-                                    <textarea id="description" class="form-control summernote" id="description" placeholder="Enter Description"></textarea>
+                                    <textarea id="description1" class="form-control summernote"  placeholder="Enter Description"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea id="description" class="form-control"  placeholder="Enter Description"></textarea>
                                 </div>
                                 <div class="mb-3"><br>
                                     <label for="status"> {{__('Status')}}  </label>
                                     <label class="custom-switch mt-2">
-                                        <input type="checkbox" name="custom-switch-checkbox" value="video-quality-status/"   class= custom-switch-input">
+{{--                                        <input type="checkbox" name="custom-switch-checkbox" value="video-quality-status/"   class= custom-switch-input">--}}
                                         <span class="custom-switch-indicator"></span>
                                     </label>
-
-{{--                                    <div class="form-check">--}}{{--<br>--}}
-{{--                                        <input class="form-check-input ml-3" type="radio" id="status"  name="status" value="1" />--}}
-{{--                                        <label class="form-check-label ml-3" for="status"> Published </label>--}}
-
-{{--                                        <input class="form-check-input ml-2" type="radio" id="status"  name="status"  value="0" />--}}
-{{--                                        <label class="form-check-label ml-2" for="status">Unpublished</label>--}}
-{{--                                    </div>--}}
+{{--                                    <label><input type="radio" name="status" {{ $data->status== 1 ? 'checked': '' }} id="status" value="1" required /> Published</label>--}}
+{{--                                    <label><input type="radio" name="status" {{ $data->status== 0 ? 'checked': '' }}  id="status" value="0" required /> Unpublished</label>--}}
                                 </div>
                                 <input type="hidden" class="form-control" id="id" />
                                 <div class="form-group text-right">
-                                    <button type="submit" id="addTC" class="btn btn-secondary" onclick="addTopContent()">Add</button>
-                                    <button type="submit" id="updateTC" class="btn btn-secondary " onclick="updateData()">Update</button>
+                                    <button type="submit" id="addTC" class="btn btn-primary" onclick="addTopContent()">Add</button>
+                                    <button type="submit" id="updateTC" class="btn btn-primary " onclick="updateData()">Update</button>
                                 </div>
                                 {{--                    </form>--}}
                             </div>
@@ -98,7 +96,6 @@
         })
 
         function addTopContent(){
-
            var title_one    = $('#title_one').val();
            var title_two    = $('#title_two').val();
            var description  = $('#description').val();
@@ -152,8 +149,8 @@
                         data = data + "<td>"+value.description+"</td>"
                         data = data + "<td>"+value.status+"</td>"
                         data = data + "<td>"
-                        data = data + "<button class='btn btn-info text-light m-1 ' ><i class='fa fa-edit'></i> </button>"
-                        data = data + "<button class='btn btn-danger text-light m-1' onclick='deleteTopContent("+value.id+")'><i class='fa fa-trash'></i> </button>"
+                        data = data + "<button class='btn btn-outline-success rounded-circle m-1' onclick='editTopContent("+value.id+")'><i class='fa fa-edit'></i> </button>"
+                        data = data + "<button class='btn btn-outline-danger rounded-circle m-1' onclick='deleteTopContent("+value.id+")'><i class='fa fa-trash'></i> </button>"
                         data = data + "</td>"
                         data = data +"</tr>"
                     })
@@ -196,6 +193,25 @@
                         allTopContent();
                     })
             }
+        }
+        function editTopContent(id){
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "/top-section-edit/"+id,
+                success: function (data){
+                    $('#addT').hide();
+                    $('#UpdateT').show();
+                    $('#addTC').hide();
+                    $('#updateTC').show();
+
+                    $('#id').val(data.id);
+                    $('#title_one').val(data.title_one);
+                    $('#title_two').val(data.title_two);
+                    $('#description').val(data.description);
+                    $('#status').val(data.status);
+                }
+            })
         }
 
 
