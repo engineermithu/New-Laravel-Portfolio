@@ -20,13 +20,13 @@
     </div>
     @include('partials.footer-assets')
     @include('partials.message')
-    @if(Session::has('message'))
-        <script type="text/javascript">
-            $(document).ready(function (){
-                toastr.success('{{Session::get('message')}}');
-            })
-        </script>
-    @endif
+{{--    @if(Session::has('message'))--}}
+{{--        <script type="text/javascript">--}}
+{{--            $(document).ready(function (){--}}
+{{--                toastr.error('{{Session::get('message')}}');--}}
+{{--            })--}}
+{{--        </script>--}}
+{{--    @endif--}}
     @yield('modal')
 
 </body>

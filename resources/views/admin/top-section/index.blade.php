@@ -147,7 +147,17 @@
                         data = data + "<td>"+value.title_one+"</td>"
                         data = data + "<td>"+value.title_two+"</td>"
                         data = data + "<td>"+value.description+"</td>"
-                        data = data + "<td>"+value.status+"</td>"
+                    //     data = data + "<td>"
+                    //        " <label class="switch switch-status">
+                    //         <input type="checkbox" class="status" id="31" checked="">
+                    //         <span class="slider round"></span>
+                    // </label>
+                    //     <input type="checkbox" class="status" id="31" checked="">
+                    //         <span class="slider round"></span>
+                    //     </label>"
+                    //         // +value.status+
+                    //
+                    //         "</td>"
                         data = data + "<td>"
                         data = data + "<button class='btn btn-outline-success rounded-circle m-1' onclick='editTopContent("+value.id+")'><i class='fa fa-edit'></i> </button>"
                         data = data + "<button class='btn btn-outline-danger rounded-circle m-1' onclick='deleteTopContent("+value.id+")'><i class='fa fa-trash'></i> </button>"
