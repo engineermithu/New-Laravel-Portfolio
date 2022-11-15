@@ -31,8 +31,9 @@ class TopSectionController extends Controller
 
     public function store(Request $request)
     {
+//        dd($request->all());
         $data = $this->top_section->store($request);
-        return response()->json($data);
+        return response()->json(['s'=>$data]);
     }
 
 
@@ -45,16 +46,18 @@ class TopSectionController extends Controller
 
     public function edit($id)
     {
+
         $data = $this->top_section->edit($id);
-        return response()->json($data);
+
+        return response()->json(['data'=>$data]);
 //           return view('admin.top-section.index',compact('data'));
 //        return view('admin.top-section.index',['data' =>TopSection::find($id)]);
     }
 
 
-    public function update(Request $request, $id)
+    public function updated(Request $request, $id_protfolio)
     {
-        $data = $this->top_section->update($request,$id);
+        $data = $this->top_section->update($request,$id_protfolio);
         return response()->json($data);
     }
 

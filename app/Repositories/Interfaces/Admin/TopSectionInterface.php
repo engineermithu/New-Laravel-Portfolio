@@ -12,6 +12,6 @@ interface TopSectionInterface
 
     public function destroy($id);
 
-    public function update($request, $id);
+    public function update($request,$id_protfolio);
 
 }

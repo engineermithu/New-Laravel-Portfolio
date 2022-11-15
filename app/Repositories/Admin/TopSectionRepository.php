@@ -14,6 +14,7 @@ class TopSectionRepository implements TopSectionInterface
                 'title_one'      => $request->title_one,
                 'title_two'      => $request->title_two,
                 'description'    => $request->description,
+                'status'         => $request->status,
 //          'status'         => $request->status
             ]);
         }catch (\Exception $e){
@@ -33,7 +34,7 @@ class TopSectionRepository implements TopSectionInterface
     public function edit($id)
     {
         try {
-            return TopSection::findOrFail($id);
+            return TopSection::find($id);
         }catch (\Exception $e){
             echo $e;
         }
@@ -50,10 +51,16 @@ class TopSectionRepository implements TopSectionInterface
         }
     }
 
-    public function update($request, $id)
+    public function update($request,$id_protfolio)
     {
+//        dd($request->all());
         try {
-
+             TopSection::findOrFail($id_protfolio)->update([
+                'title_one'      => $request->title_one,
+                'title_two'      => $request->title_two,
+                'description'    => $request->description,
+                 'status'        => $request->status,
+            ]);
         }catch (\Exception $e){
             echo $e;
         }

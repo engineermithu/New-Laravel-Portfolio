@@ -16,11 +16,18 @@
         </div>
     </div>
     @include('admin.partials.footer-assets')
-    @include('admin.partials.message')
-    @if(Session::has('message'))
+{{--    @include('admin.partials.message')--}}
+    @if(Session::has('error'))
         <script type="text/javascript">
             $(document).ready(function (){
-                toastr.success('{{Session::get('message')}}');
+                toastr.error('{{Session::get('error')}}');
+            })
+        </script>
+    @endif
+    @if(Session::has('success'))
+        <script type="text/javascript">
+            $(document).ready(function (){
+                toastr.success('{{Session::get('success')}}');
             })
         </script>
     @endif

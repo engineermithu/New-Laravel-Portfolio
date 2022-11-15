@@ -1,13 +1,13 @@
 <!-- START HEADER-->
 <header class="header">
     <div class="page-brand">
-        <a class="link" href="#">
+{{--        <a class="" href="#">--}}
             {{--                    <span class="brand">Admin--}}
             {{--                        <span class="brand-tip">CAST</span>--}}
             {{--                    </span>--}}
-            <h3>Admin CAST</h3>
+            <h3 style="font-weight: bold">PORTFOLIO</h3>
             <span class="brand-mini">AC</span>
-        </a>
+{{--        </a>--}}
     </div>
     <div class="flexbox flex-1">
         <!-- START TOP-LEFT TOOLBAR-->
@@ -142,13 +142,16 @@
             <li class="dropdown dropdown-user">
                 <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
                     <img src="{{asset('admin-assets')}}/img/admin-avatar.png" />
-                    <span></span>Admin<i class="fa fa-angle-down m-l-5"></i></a>
+                    <span></span>{{Sentinel::getUser()->first_name.' '.Sentinel::getUser()->last_name}}<i class="fa fa-angle-down m-l-5"></i></a>
+{{--                    <div class="d-sm-none d-lg-inline-block">{{Sentinel::getUser()->first_name }}</div>--}}
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.html"><i class="fa fa-user"></i>Profile</a>
-                    <a class="dropdown-item" href="profile.html"><i class="fa fa-cog"></i>Settings</a>
-                    <a class="dropdown-item" href="javascript:;"><i class="fa fa-support"></i>Support</a>
-                    <li class="dropdown-divider"></li>
-                    <a class="dropdown-item" href="login.html"><i class="fa fa-power-off"></i>Logout</a>
+                    <a class="dropdown-item" href="{{ route('profile') }}"><i class="fa fa-user"></i>Update Profile</a>
+                    <a class="dropdown-item" href="{{route('change.password')}}"><i class="fa fa-key"></i>Change Password</a>
+{{--                    <li class="dropdown-divider"></li>--}}
+                    <a href="{{ route('logout') }}" class="dropdown-item">
+                        <i class="fa fa-power-off"></i> {{__('Logout')}}
+                    </a>
+{{--                    <a class="dropdown-item" href="login.html"><i class="fa fa-power-off"></i>Logout</a>--}}
                 </ul>
             </li>
         </ul>

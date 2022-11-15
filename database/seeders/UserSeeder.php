@@ -16,7 +16,7 @@ class UserSeeder extends Seeder{
             'first_name'    => 'Supper',
             'last_name'     => 'Admin',
             'email'         => 'admin@gmail.com',
-            'password'      => bcrypt(12345678),
+            'password'      => 12345678,
             'phone'         => '01726184147',
             'user_type'     => 'admin',
             'permissions'   => $this->superAdminPermissions()

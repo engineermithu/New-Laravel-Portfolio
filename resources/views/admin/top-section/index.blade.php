@@ -37,40 +37,44 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-header section-header">
-                                <span id="addT">Add new Section top Content</span>
-                                <span id="UpdateT">Update Section top Content</span>
+                                <span id="addT">Add Content</span>
+                                <span id="UpdateT">Update Content</span>
                             </div>
                             <div class="card-body">
                                 {{--                    <form>--}}
                                 <div class="mb-3">
                                     <label for="title_one" class="form-label">Title Part One</label>
-                                    <input type="text" class="form-control" id="title_one" placeholder="Enter Title">
+                                    <input type="text" class="form-control title_one" id="title_one" placeholder="Enter Title">
                                 </div>
                                 <div class="mb-3">
                                     <label for="title_two" class="form-label">Title Part Two</label>
-                                    <input type="text" class="form-control" id="title_two" placeholder="Enter Title">
+                                    <input type="text" class="form-control title_two" id="title_two" placeholder="Enter Title">
                                 </div>
+{{--                                <div class="mb-3">--}}
+{{--                                    <label for="description" class="form-label">Description</label>--}}
+{{--                                    <textarea id="description" class="form-control summernote"  placeholder="Enter Description"></textarea>--}}
+{{--                                </div>--}}
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Description</label>
-                                    <textarea id="description1" class="form-control summernote"  placeholder="Enter Description"></textarea>
+                                    <textarea id="description" name="description" class="form-control description"  placeholder="Enter Description"></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="description" class="form-label">Description</label>
-                                    <textarea id="description" class="form-control"  placeholder="Enter Description"></textarea>
-                                </div>
-                                <div class="mb-3"><br>
                                     <label for="status"> {{__('Status')}}  </label>
-                                    <label class="custom-switch mt-2">
-{{--                                        <input type="checkbox" name="custom-switch-checkbox" value="video-quality-status/"   class= custom-switch-input">--}}
-                                        <span class="custom-switch-indicator"></span>
-                                    </label>
-{{--                                    <label><input type="radio" name="status" {{ $data->status== 1 ? 'checked': '' }} id="status" value="1" required /> Published</label>--}}
-{{--                                    <label><input type="radio" name="status" {{ $data->status== 0 ? 'checked': '' }}  id="status" value="0" required /> Unpublished</label>--}}
+                                    <select name="status" id="status" class="form-control status">
+                                        <option value="1">Publish</option>
+                                        <option value="0">Unpublish</option>
+                                    </select>
                                 </div>
-                                <input type="hidden" class="form-control" id="id" />
+
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" >
+                                    <label class="form-check-label" for="flexSwitchCheckChecked">ON</label>
+                                </div>
+
+                                <input type="text" class="form-control" id="id" />
                                 <div class="form-group text-right">
                                     <button type="submit" id="addTC" class="btn btn-primary" onclick="addTopContent()">Add</button>
-                                    <button type="submit" id="updateTC" class="btn btn-primary " onclick="updateData()">Update</button>
+                                    <button type="submit" id="updateTC" class="btn btn-primary id_protfolio" onclick="updateData()">Update</button>
                                 </div>
                                 {{--                    </form>--}}
                             </div>
@@ -91,7 +95,7 @@
 
         $.ajaxSetup({
             headers:{
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         })
 
@@ -105,22 +109,23 @@
                type: "POST",
                dataType: "json",
                data: {title_one:title_one,title_two:title_two, description:description, status:status},
-               url: "/section-top-store",
-               success: function (data){
+               url: "/admin/section-top-store",
+               success: function (res){
                    clearTopContent();
                    allTopContent();
                    // Alert
-                   const Msg = Swal.mixin({
-                       toast:'true',
-                       position: 'top-end',
-                       icon: 'success',
-                       showConfirmButton: false,
-                       timer: 1600
-                   });
-                   Msg.fire({
-                       type: 'success',
-                       title: 'Data Added Successfully'
-                   })
+                   // const Msg = Swal.mixin({
+                   //     toast:'true',
+                   //     position: 'top-end',
+                   //     icon: 'success',
+                   //     showConfirmButton: false,
+                   //     timer: 1600
+                   // });
+                   // Msg.fire({
+                   //     type: 'success',
+                   //     title: 'Data Added Successfully'
+                   // })
+                   toastr.success('Data Added Successfully')
                    // End Alert
                    console.log(data)
                }
@@ -138,7 +143,7 @@
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: "/top-section-all",
+                url: "/admin/top-section-all",
                 success: function (response){
                     var data = "";
                     $.each(response, function (key, value){
@@ -147,6 +152,7 @@
                         data = data + "<td>"+value.title_one+"</td>"
                         data = data + "<td>"+value.title_two+"</td>"
                         data = data + "<td>"+value.description+"</td>"
+                        data = data + "<td>"+value.status+"</td>"
                     //     data = data + "<td>"
                     //        " <label class="switch switch-status">
                     //         <input type="checkbox" class="status" id="31" checked="">
@@ -189,7 +195,7 @@
                             $.ajax({
                                 type: "delete",
                                 dataType: "json",
-                                url: "/section-top-destroy/"+id,
+                                url: "/admin/section-top-destroy/"+id,
                                 success: function (data){
                                     Swal.fire(
                                         'Deleted!',
@@ -208,18 +214,54 @@
             $.ajax({
                 type: "GET",
                 dataType: 'json',
-                url: "/top-section-edit/"+id,
-                success: function (data){
+                url: "/admin/top-section-edit/"+id,
+                success: function (res){
                     $('#addT').hide();
                     $('#UpdateT').show();
                     $('#addTC').hide();
                     $('#updateTC').show();
 
-                    $('#id').val(data.id);
-                    $('#title_one').val(data.title_one);
-                    $('#title_two').val(data.title_two);
-                    $('#description').val(data.description);
-                    $('#status').val(data.status);
+                    $('#id').val(res.data.id);
+                    $('.title_one').val(res.data.title_one);
+                    $('.title_two').val(res.data.title_two);
+                    $('.description').val(res.data.description);
+                    $('.status').val(res.data.status);
+                }
+            })
+        }
+
+        function updateData(){
+            var id   = $('#id').val();
+            var title_one    = $('#title_one').val();
+            var title_two    = $('#title_two').val();
+            var description  = $('#description').val();
+            var status       = $('#status').val();
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                data: {description:description,title_one:title_one,title_two:title_two,  status:status},
+                url: "/admin/section-top-update/"+id,
+                success: function (res){
+
+
+                    clearTopContent();
+                    allTopContent();
+                    // Alert
+                    // const Msg = Swal.mixin({
+                    //     toast:'true',
+                    //     position: 'top-end',
+                    //     icon: 'success',
+                    //     showConfirmButton: false,
+                    //     timer: 1600
+                    // });
+                    // Msg.fire({
+                    //     type: 'success',
+                    //     title: 'Data Added Successfully'
+                    // })
+                    toastr.success('Data Updated Successfully')
+                    // End Alert
+                    console.log(data)
                 }
             })
         }

@@ -10,16 +10,16 @@
         </div>
         <ul class="side-menu metismenu">
             <li>
-                <a class="active" href="{{ route('dashboard') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
+                <a class="active text-decoration-none" href="{{ route('dashboard') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
                     <span class="nav-label">Dashboard</span>
                 </a>
             </li>
             <li class="heading">FEATURES</li>
             <li>
-                <a href="javascript:;"><i class="sidebar-item-icon fa fa-bookmark"></i>
-                    <span class="nav-label">Top Section</span><i class="fa fa-heading"></i></a>
+                <a href="javascript:;"><i class="sidebar-item-icon fa fa-bookmark "></i>
+                    <span class=" text-decoration-none">Top Section</span><i class="fa fa-heading"></i></a>
                 <ul class="nav-2-level collapse">
-                    <li class=" @yield('top_section_active')">
+                    <li class="text-decoration-none @yield('top_section_active')">
                         <a href="{{ route('top.section') }}">Manage</a>
                     </li>
                 </ul>
