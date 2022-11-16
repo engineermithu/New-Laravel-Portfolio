@@ -26,25 +26,24 @@
                         <div class="card profile-widget">
 
 {{--                            @include('admin.common.sidebar')--}}
-                            <div class="profile-widget-header">
-                                @if(Sentinel::getUser()->image != '' && is_file_exists(Sentinel::getUser()->image))
-                                    <img alt="Not Found!" src="{{static_asset(Sentinel::getUser()->image)}}"
+                            <div class="profile-widget-header text-center mt-3">
+                                @if(Sentinel::getUser()->image != '' && (Sentinel::getUser()->image))
+                                    <img alt="Not Found!" src="{{asset(Sentinel::getUser()->image)}}"
                                          class="rounded-circle profile-widget-picture">
                                 @else
                                     <img alt="Not Found!"
-                                         {{--         src="{{get_image(Sentinel::getUser()->id,'user_image')}}"--}}
-                                         src=""
+                                         {{--                                                  src="{{get_image(Sentinel::getUser()->id,'user_image')}}"--}}
+                                         src="{{asset('assets/img/user.jpg')}}"
                                          class="rounded-circle profile-widget-picture">
                                 @endif
-                                <div class="profile-widget-items">
-                                    <div class="profile-widget-item text-left ml-3">
-                                        <div
-                                            class="profile-widget-item-value">{{Sentinel::getUser()->first_name.' '.Sentinel::getUser()->last_name}}</div>
+                                <div class="profile-widget-items text-center">
+                                    <div class="profile-widget-item text-left ml-3 text-center">
+                                        <div class="profile-widget-item-value">{{Sentinel::getUser()->first_name.' '.Sentinel::getUser()->last_name}}</div>
                                         <div class="profile-widget-item-label">{{ Sentinel::getUser()->email }}</div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer text-left">
+                            <div class="card-footer text-left mt-2">
                                 <ul class="nav nav-pills flex-column">
                                     <li class="nav-item">
                                         <a class="nav-link   @yield('profile')" href="{{route('profile')}}"><i class="fa fa-user"></i> {{ __(' Profile') }}</a>
@@ -59,16 +58,14 @@
                                     </li>
                                 </ul>
                             </div>
-
-
                             {{--@include('admin.common.logout-script')--}}
 
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-6 col-lg-8">
+                    <div class="col-sm-12 col-md-6 col-lg-8 mt-4">
                         <div class="card">
                             <div class="card-header bg-info text-white">
-                                <h4>{{__('Change Password')}}</h4>
+                                <h2>{{__('Change Password')}}</h2>
                             </div>
                             <form class="needs-validation" action="{{ route('update.password') }}" method="post" enctype="multipart/form-data">
                                 @csrf

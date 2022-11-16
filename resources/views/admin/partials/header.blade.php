@@ -141,7 +141,7 @@
             </li>
             <li class="dropdown dropdown-user">
                 <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
-                    <img src="{{asset('admin-assets')}}/img/admin-avatar.png" />
+                    <img src="{{ asset('images/'.Sentinel::getUser()->image)}}" />
                     <span></span>{{Sentinel::getUser()->first_name.' '.Sentinel::getUser()->last_name}}<i class="fa fa-angle-down m-l-5"></i></a>
 {{--                    <div class="d-sm-none d-lg-inline-block">{{Sentinel::getUser()->first_name }}</div>--}}
                 <ul class="dropdown-menu dropdown-menu-right">

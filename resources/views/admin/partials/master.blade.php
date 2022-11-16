@@ -22,6 +22,8 @@
     </div>
     @include('admin.partials.footer-assets')
     @include('admin.partials.message')
+    @yield('modal')
+    @yield('font-js')
     @if(Session::has('message'))
         <script type="text/javascript">
             $(document).ready(function (){

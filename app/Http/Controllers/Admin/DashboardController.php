@@ -8,9 +8,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Sentinel;
 use Illuminate\Support\Facades\Hash;
-
+use App\Traits\MediaTraits;
+use File;
 class DashboardController extends Controller
 {
+    use MediaTraits;
+
    public function index(){
         return view('admin.dashboard');
    }
@@ -24,19 +27,34 @@ class DashboardController extends Controller
    }
 
    public function updateProfile(Request $request){
+//       dd($request->all());
+
+
        try {
-           $user = User::find($request->user_id);
-           $user->first_name   = $request->first_name;
-           $user->last_name    = $request->last_name;
-           $user->email        = $request->email;
+           $user                = User::find($request->user_id);
+           $deleteOldImage = 'images/'.$user->image;
+           if($request->hasFile('image')) {
+
+               $student_image = $request->file('image');
+               if(file_exists($deleteOldImage)){
+                   File::delete($deleteOldImage);
+               }
+               $imageName = time() . '-' . uniqid() . '.' . $student_image->getClientOriginalExtension();
+               $student_image->move('images/', $imageName);
+           }
+           else
+           {
+               $imageName = $request->image;
+           }
+           $user->first_name    = $request->first_name;
+           $user->last_name     = $request->last_name;
+           $user->email         = $request->email;
+           $user->phone         = $request->phone;
+           $user->image         = $imageName;
+           $user->update();
 
 
-//            if (!blank($request->file('image'))) {
-//                $requestImage   = $request->file('image');
-//                $user->image    = $this->updateImage($requestImage, $user->image, 'user');
-//            }
-           $user->save();
-
+//
 //           if (!blank($request->file('image'))){
 //               $requestImage           = $request->file('image');
 //               $this->updateImage($requestImage, 'user_image/'.$user->id.'.jpg','user_photo',$user->id);
@@ -55,7 +73,6 @@ class DashboardController extends Controller
    }
 
    public function updatePassword(Request $request){
-
        try {
            $user = Sentinel::getUser();
            if (Hash::check($request->new_password, $user->password)) {
@@ -79,9 +96,7 @@ class DashboardController extends Controller
                    'error' => __('Current Password does not match with old password')
                ]);
            }
-
-
-           return true;
+           return redirect()->back()->with(['success' => __('Password Updated Successfully')]);
        } catch (\Exception $e) {
 
 
