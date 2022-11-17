@@ -25,11 +25,11 @@ class PermissionSeeder extends Seeder
                 'delete'    => 'editor_delete'
             ],
 
-            'staff' => [
-                'create'    => 'staff_create',
-                'read'      => 'staff_read',
-                'update'    => 'staff_update',
-                'delete'    => 'staff_delete'
+            'top section' => [
+                'create'    => 'top_section_create',
+                'read'      => 'top_section_read',
+                'update'    => 'top_section_update',
+                'delete'    => 'top_section_delete',
             ],
 
             'role' => [

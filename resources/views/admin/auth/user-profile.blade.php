@@ -25,17 +25,27 @@
                         <div class="card profile-widget">
 {{--                            @include('admin.common.sidebar')--}}
                             <div class="profile-widget-header text-center mt-3">
-                                @if(Sentinel::getUser()->image != '' && (Sentinel::getUser()->image))
+                                <img src="{{Sentinel::getUser()->image != null? asset('images/'.Sentinel::getUser()->image) : asset('/images/user.jpg')}}"
+                                     class="rounded-circle profile-widget-picture" height="128" width="128" />
+
+{{--                                @if(Sentinel::getUser()->image)--}}
+{{--                                    <img src="{{ asset('images/'.Sentinel::getUser()->image) }}" />--}}
+{{--                                @else--}}
+{{--                                    <img src="{{asset('images/user.jpg')}}" />--}}
+{{--                                @endif--}}
+
+
+{{--                                @if(Sentinel::getUser()->image != '' && (Sentinel::getUser()->image))--}}
 {{--                                @if(Sentinel::getUser()->image != '' && is_file_exists(Sentinel::getUser()->image))--}}
 
 
-                                    <img alt="Not Found!" style="width: 120px;height: 120px;" src="{{asset('images/'.Sentinel::getUser()->image)}}" class="rounded-circle profile-widget-picture">
-                                @else
-                                    <img alt="Not Found!"
+{{--                                    <img alt="Not Found!" style="width: 120px;height: 120px;" src="{{asset('images/'.Sentinel::getUser()->image)}}" class="rounded-circle profile-widget-picture">--}}
+{{--                                @else--}}
+{{--                                    <img alt="Not Found!"--}}
 {{--                                                  src="{{get_image(Sentinel::getUser()->id,'user_image')}}"--}}
-                                         src="{{asset('assets/img/user.jpg')}}"
-                                         class="rounded-circle profile-widget-picture">
-                                @endif
+{{--                                         src="{{asset('assets/img/user.jpg')}}"--}}
+{{--                                         class="rounded-circle profile-widget-picture">--}}
+{{--                                @endif--}}
                                 <div class="profile-widget-items text-center">
                                     <div class="profile-widget-item text-left ml-3 text-center">
                                         <div class="profile-widget-item-value">{{Sentinel::getUser()->first_name.' '.Sentinel::getUser()->last_name}}</div>
@@ -47,7 +57,8 @@
                             <div class="card-footer text-left mt-3">
                                 <ul class="nav nav-pills flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link  active @yield('profile')" href="{{route('profile')}}"><i class="fa fa-user"></i> {{ __(' Profile') }}</a>
+{{--                                        <a class="nav-link  active @yield('profile')" onclick="updateProfile()"><i class="fa fa-user"></i> {{ __(' Update Profile') }}</a>--}}
+                                        <a class="nav-link  active @yield('profile')" href="{{route('profile')}}" onclick="updateProfile()"><i class="fa fa-user"></i> {{ __(' Update Profile') }}</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link  @yield('password-change')"
@@ -73,13 +84,6 @@
                                     </div>
                                 </div>
                             </div>
-{{--                            <div class="card-header justify-content-center">--}}
-{{--                                <h4>{{__('Personal Information')}}</h4>--}}
-{{--                                <div class="form-group ">--}}
-{{--                                    <a href="" class="btn btn-outline-primary cache-btn"--}}
-{{--                                       data-toggle="modal" data-target="#addProfileModal"><i class="bx bx-edit"></i> {{ __('Edit') }}</a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
                             <div class="card-body">
                                 <div class="row">
                                     <table class="table mt-3 profile-head">
@@ -134,6 +138,7 @@
 
 @section('modal')
     <!-- Modal -->
+
     <div class="modal fade" id="addProfileModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -152,13 +157,16 @@
                         <div class="form-group row">
                             <label for="first_name" class="col-3">{{__('First Name')}} *</label>
                             <div class="col-9">
-                                <input type="text" id="first_name" class="form-control"
-                                       placeholder="{{__("Enter First Name")}}"
-                                       name="first_name" value="{{Sentinel::getUser()->first_name}}">
+                                <input type="text" id="first_name" class="form-control" placeholder="{{__("Enter First Name")}}"
+                                       name="first_name" value="{{Sentinel::getUser()->first_name}}" required/>
                                 @error('first_name')
                                 <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
                                 @enderror
                             </div>
+
+
+
+
                         </div>
                         <div class="form-group row">
                             <label for="last_name" class="col-3">{{__('Last Name')}} *</label>
@@ -199,17 +207,20 @@
                                 <input type="file" class="custom-file-input image_pick" id="customFile"
                                        data-image-for="profile" name="image" accept="image/*" />
                                 <label class="custom-file-label" for="customFile"> {{__("Choose image...")}}</label>
-                                @if($errors->has('image'))
-                                    <div class="text text-danger mr-5">
-                                        {{$errors->first('image')}}
-                                    </div>
-                                @endif
+{{--                                @if($errors->has('image'))--}}
+{{--                                    <div class="text text-danger mr-5">--}}
+{{--                                        {{$errors->first('image')}}--}}
+{{--                                    </div>--}}
+{{--                                @endif--}}
+                                @error('image')
+                                <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         @if(Sentinel::getUser()->image !== '' && (Sentinel::getUser()->image))
                             <div class="form-group mt-4 text-left">
                                 <img src="{{asset('images/'.Sentinel::getUser()->image) }}"
-                                 alt="" id="img_profile" class="img-thumbnail user-profile"/>
+                                 alt="" id="img_profile" class="img-thumbnail user-profile" height="128" width="128" />
                         </div>
                         @else
                         <div class="form-group mt-4 text-left">
@@ -244,6 +255,11 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+        function updateProfile(){
+            alert("dgfdg")
+        }
+
         jQuery(function ($){
             $(".image_pick").on("change", function () {
                 var image_for = $(this).attr('data-image-for');

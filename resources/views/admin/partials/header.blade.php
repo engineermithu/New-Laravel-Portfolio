@@ -141,10 +141,13 @@
             </li>
             <li class="dropdown dropdown-user">
                 <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
-                    <img src="{{ asset('images/'.Sentinel::getUser()->image)}}" />
+{{--                    <img src="{{ asset('images/'.Sentinel::getUser()->image)}}" />--}}
+                    <img src="{{Sentinel::getUser()->image != null? asset('images/'.Sentinel::getUser()->image) : asset('/images/user.jpg')}}"
+                         class="rounded-circle profile-widget-picture" width="45" />
                     <span></span>{{Sentinel::getUser()->first_name.' '.Sentinel::getUser()->last_name}}<i class="fa fa-angle-down m-l-5"></i></a>
 {{--                    <div class="d-sm-none d-lg-inline-block">{{Sentinel::getUser()->first_name }}</div>--}}
                 <ul class="dropdown-menu dropdown-menu-right">
+{{--                    <a class="dropdown-item" href="" onclick="updateProfile()"><i class="fa fa-user"></i>Update Profile</a>--}}
                     <a class="dropdown-item" href="{{ route('profile') }}"><i class="fa fa-user"></i>Update Profile</a>
                     <a class="dropdown-item" href="{{route('change.password')}}"><i class="fa fa-key"></i>Change Password</a>
 {{--                    <li class="dropdown-divider"></li>--}}
@@ -158,5 +161,24 @@
         <!-- END TOP-RIGHT TOOLBAR-->
     </div>
 </header>
+
+<script>
+    // $.ajaxSetup({
+    //     headers:{
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //     }
+    // })
+    //
+    // function updateProfile(){
+    //         $.ajax({
+    //             type: "GET",
+    //             dataType: "json",
+    //             url: "/admin/profile",
+    //             success: function (response){
+    //
+    //             }
+    //         })
+    // }
+</script>
 <!-- END HEADER-->
 

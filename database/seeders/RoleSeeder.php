@@ -31,10 +31,10 @@ class RoleSeeder extends Seeder
             'editor_update',
             'editor_delete',
 
-            'staff_create',
-            'staff_read',
-            'staff_update',
-            'staff_delete',
+            'top_section_create',
+            'top_section_read',
+            'top_section_update',
+            'top_section_delete',
 
             'role_create',
             'role_read',

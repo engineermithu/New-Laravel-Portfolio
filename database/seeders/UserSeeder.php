@@ -16,7 +16,7 @@ class UserSeeder extends Seeder{
             'first_name'    => 'Supper',
             'last_name'     => 'Admin',
             'email'         => 'admin@gmail.com',
-            'password'      => 12345678,
+            'password'      =>  12345678,
             'phone'         => '01726184147',
             'user_type'     => 'admin',
             'permissions'   => $this->superAdminPermissions()
@@ -40,10 +40,10 @@ class UserSeeder extends Seeder{
             'editor_update',
             'editor_delete',
 
-            'staff_create',
-            'staff_read',
-            'staff_update',
-            'staff_delete',
+            'top_section_create',
+            'top_section_read',
+            'top_section_update',
+            'top_section_delete',
 
             'role_create',
             'role_read',

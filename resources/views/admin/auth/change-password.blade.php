@@ -27,15 +27,18 @@
 
 {{--                            @include('admin.common.sidebar')--}}
                             <div class="profile-widget-header text-center mt-3">
-                                @if(Sentinel::getUser()->image != '' && (Sentinel::getUser()->image))
-                                    <img alt="Not Found!" src="{{asset(Sentinel::getUser()->image)}}"
-                                         class="rounded-circle profile-widget-picture">
-                                @else
-                                    <img alt="Not Found!"
-                                         {{--                                                  src="{{get_image(Sentinel::getUser()->id,'user_image')}}"--}}
-                                         src="{{asset('assets/img/user.jpg')}}"
-                                         class="rounded-circle profile-widget-picture">
-                                @endif
+                                <img src="{{Sentinel::getUser()->image != null? asset('images/'.Sentinel::getUser()->image) : asset('/images/user.jpg')}}"
+                                     class="rounded-circle profile-widget-picture" height="128" width="128" />
+
+                                {{--                                @if(Sentinel::getUser()->image != '' && (Sentinel::getUser()->image))--}}
+{{--                                    <img alt="Not Found!" src="{{asset(Sentinel::getUser()->image)}}"--}}
+{{--                                         class="rounded-circle profile-widget-picture">--}}
+{{--                                @else--}}
+{{--                                    <img alt="Not Found!"--}}
+{{--                                         --}}{{--                                                  src="{{get_image(Sentinel::getUser()->id,'user_image')}}"--}}
+{{--                                         src="{{asset('assets/img/user.jpg')}}"--}}
+{{--                                         class="rounded-circle profile-widget-picture">--}}
+{{--                                @endif--}}
                                 <div class="profile-widget-items text-center">
                                     <div class="profile-widget-item text-left ml-3 text-center">
                                         <div class="profile-widget-item-value">{{Sentinel::getUser()->first_name.' '.Sentinel::getUser()->last_name}}</div>
@@ -46,7 +49,7 @@
                             <div class="card-footer text-left mt-2">
                                 <ul class="nav nav-pills flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link   @yield('profile')" href="{{route('profile')}}"><i class="fa fa-user"></i> {{ __(' Profile') }}</a>
+                                        <a class="nav-link   @yield('profile')" href="{{route('profile')}}"><i class="fa fa-user"></i> {{ __(' Update Profile') }}</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active @yield('password-change')"

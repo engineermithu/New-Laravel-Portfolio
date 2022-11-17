@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Front\PortfolioController;
+use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TopSectionController;
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +18,7 @@ use App\Http\Controllers\Admin\TopSectionController;
 |
 */
 
-Route::get('/',[PortfolioController:: class, 'index'])->name('/');
+Route::get('/',[HomeController:: class, 'index'])->name('/');
 
 //Route::group(['logoutCheck'],function (){
 Route::get('login', [LoginController::class, 'index']);
@@ -27,9 +29,12 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 //Route::group(['middleware' =>'auth'],function (){
 
-//    Route::prefix('admin')->group(function () {
+    Route::prefix('admin')->group(function () {
+
         Route::controller(DashboardController::class)->group(function (){
             Route::get('/dashboard',  'index')->name('dashboard');
+        });
+        Route::controller(UserController::class)->group(function (){
             Route::get('/profile',  'userProfile')->name('profile');
             Route::get('/change-password',  'changePassword')->name('change.password');
             Route::put('/update-password',  'updatePassword')->name('update.password');
@@ -44,7 +49,10 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
             Route::get('/top-section-edit/{id}','edit')->name('edit.top.section');
             Route::post('/section-top-update/{id_protfolio}', 'updated')->name('update.top.section');
 
-
         });
-//    });
+        Route::get('roles', [RoleController::class, 'index'])->name('admin.roles');
+        Route::get('create-role', [RoleController::class, 'create'])->name('admin.create.role');
+        Route::post('store-role', [RoleController::class, 'store'])->name('admin.store.role');
+//        Route::delete('delete/roles/{id}', [CommonController::class, 'delete'])->name('admin.delete.role')->middleware('PermissionCheck:role_delete');
+    });
 //});

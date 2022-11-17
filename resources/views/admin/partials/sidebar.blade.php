@@ -3,10 +3,12 @@
     <div id="sidebar-collapse">
         <div class="admin-block d-flex">
             <div>
-                <img src="{{asset('admin-assets')}}/img/admin-avatar.png" width="45px" />
+{{--                <img src="{{ asset('images/'.Sentinel::getUser()->image)}}" width="45px" />--}}
+                <img src="{{Sentinel::getUser()->image != null? asset('images/'.Sentinel::getUser()->image) : asset('/images/user.jpg')}}"
+                     class="rounded-circle profile-widget-picture" width="45" />
             </div>
             <div class="admin-info">
-                <div class="font-strong">James Brown</div><small>Administrator</small></div>
+                <div class="font-strong">{{Sentinel::getUser()->first_name.' '.Sentinel::getUser()->last_name}}</div><small>Administrator</small></div>
         </div>
         <ul class="side-menu metismenu">
             <li>
@@ -35,14 +37,12 @@
             </li>
             <li>
                 <a href="javascript:;"><i class="sidebar-item-icon fa fa-bookmark"></i>
-                    <span class="nav-label">N</span><i class="fa fa-heading"></i></a>
+                    <span class="nav-label">Editor</span><i class="fa fa-heading"></i></a>
                 <ul class="nav-2-level collapse">
-                    <li>
-                        <a href="#">Store</a>
-                    </li>
                     <li>
                         <a href="#">Manage</a>
                     </li>
+                    <li class="@yield('roles')"><a class="nav-link" href="{{ route('admin.roles') }}"> {{ __('Roles') }}</a></li>
                 </ul>
             </li>
 
