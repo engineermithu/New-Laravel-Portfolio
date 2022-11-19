@@ -44,44 +44,43 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-{{--                                        @foreach($roles as $role)--}}
-{{--                                            <tr class="role-row-{{$role->id}}">--}}
-{{--                                                <td>{{ $loop->iteration }}</td>--}}
-{{--                                                <td>{{ $role->name }}</td>--}}
-{{--                                                <td>--}}
-{{--                                                    @if (!empty($role->permissions))--}}
-{{--                                                        @php--}}
-{{--                                                            $rolePermisions = json_decode($role->permissions, true);--}}
-{{--                                                        @endphp--}}
-{{--                                                        <label class="label "><span--}}
-{{--                                                                class="btn btn-outline-success btn-circle">{{ count($rolePermisions) }}</span></label>--}}
-{{--                                                    @else--}}
-{{--                                                        <label class="label label-default"><span--}}
-{{--                                                                class="text-warning fst-normal">{{ __('No Permission') }}</span></label>--}}
-{{--                                                    @endif--}}
-{{--                                                </td>--}}
-{{--                                                <td>{{$role->created_at->diffForHumans()}}</td>--}}
-{{--                                                <td>--}}
-{{--                                                    --}}{{--                                                                                    @if(hasPermission('role_update'))--}}
+                                        @foreach($roles as $role)
+                                            <tr class="role-row-{{$role->id}}">
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $role->name }}</td>
+                                                <td>
+                                                    @if (!empty($role->permissions))
+                                                        @php
+                                                            $rolePermisions = json_decode($role->permissions, true);
+                                                        @endphp
+                                                        <label class="label "><span class="btn btn-outline-success btn-circle">{{ count($rolePermisions) }}</span></label>
+                                                    @else
+                                                        <label class="label label-default"><span
+                                                                class="text-warning fst-normal">{{ __('No Permission') }}</span></label>
+                                                    @endif
+                                                </td>
+                                                <td>{{$role->created_at->diffForHumans()}}</td>
+                                                <td>
+{{--                                                @if(hasPermission('role_update'))--}}
 {{--                                                    <a href=""--}}
-{{--                                                       --}}{{--                                                                                        <a href="{{route('admin.edit.role',['id'=> $role->id])}}"--}}
-{{--                                                       class="btn btn-outline-warning btn-round "--}}
-{{--                                                       data-toggle="tooltip" title=""--}}
-{{--                                                       data-original-title="{{__('Edit') }}">--}}
-{{--                                                        <i class='bx bx-edit'></i>--}}
-{{--                                                    </a>--}}
-{{--                                                    --}}{{--                                                                                    @endif--}}
-{{--                                                    --}}{{--                                                                                    @if(hasPermission('role_delete'))--}}
-{{--                                                    <button--}}
-{{--                                                        class="btn btn-outline-danger btn-circle delete-btn"--}}
-{{--                                                        data-toggle="tooltip" value="{{$role->id}}" onclick="deleteRole({{$role->id}})"--}}
-{{--                                                        title="Delete" data-original-title="{{ __('Delete') }}"><i--}}
-{{--                                                            class='fa fa-trash mt-1'></i>--}}
-{{--                                                    </button>--}}
-{{--                                                    --}}{{--                                                                                    @endif--}}
-{{--                                                </td>--}}
-{{--                                            </tr>--}}
-{{--                                        @endforeach--}}
+                                                    <a href="{{route('admin.edit.role',['id'=> $role->id])}}"
+                                                       class="btn btn-outline-warning btn-circle "
+                                                       data-toggle="tooltip" title="Edit"
+                                                       data-original-title="{{__('Edit') }}">
+                                                        <i class='fa fa-edit'></i>
+                                                    </a>
+{{--                                              @endif--}}
+{{--                                              @if(hasPermission('role_delete'))--}}
+                                                    <button
+                                                        class="btn btn-outline-danger btn-circle delete-btn"
+                                                        data-toggle="tooltip" value="{{$role->id}}" onclick="deleteRole({{$role->id}})"
+                                                        title="Delete" data-original-title="{{ __('Delete') }}"><i
+                                                            class='fa fa-trash mt-1'></i>
+                                                    </button>
+{{--                                                                                                                                        @endif--}}
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -116,42 +115,7 @@
         //     })
         // });
 
-        function allTopContent(){
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: "/admin/role-all",
-                success: function (response){
-                    console.log(response.jnj)
-                    var data = "";
-                    $.each(response, function (key, value){
-                        data = data +"<tr>"
-                        data = data + "<td>"+value.id+"</td>"
-                        data = data + "<td>"+value.title_one+"</td>"
-                        data = data + "<td>"+value.title_two+"</td>"
-                        data = data + "<td>"+value.description+"</td>"
-                        data = data + "<td>"+value.status+"</td>"
-                        //     data = data + "<td>"
-                        //        " <label class="switch switch-status">
-                        //         <input type="checkbox" class="status" id="31" checked="">
-                        //         <span class="slider round"></span>
-                        // </label>
-                        //     <input type="checkbox" class="status" id="31" checked="">
-                        //         <span class="slider round"></span>
-                        //     </label>"
-                        //         // +value.status+
-                        //
-                        //         "</td>"
-                        data = data + "<td>"
-                        data = data + "<button class='btn btn-outline-success rounded-circle m-1' onclick='editTopContent("+value.id+")'><i class='fa fa-edit'></i> </button>"
-                        data = data + "<button class='btn btn-outline-danger rounded-circle m-1' onclick='deleteTopContent("+value.id+")'><i class='fa fa-trash'></i> </button>"
-                        data = data + "</td>"
-                        data = data +"</tr>"
-                    })
-                    $('tbody').html(data)
-                }
-            })
-        }
+
 
         function deleteRole(id){
 
@@ -177,11 +141,12 @@
                                         'Your file has been deleted.',
                                         'success'
                                     )
-                                }
-                            })
 
+                                }
+
+                            })
+                            window.location.reload()
                         }
-                        allTopContent();
                     })
             }
         }

@@ -38,9 +38,8 @@ class RoleController extends Controller
     }
 
     public function show(){
-
         $data = Role::all();
-        return response()->json(['jnj'=>$data]);
+        return response()->json($data);
     }
 
     public function store(Request $request){
@@ -61,21 +60,23 @@ class RoleController extends Controller
 
     public function edit($id)
     {
-        try {
+
+//        try {
             $role           = $this->roles->get($id);
+//            dd($role);
             $permissions    = $this->permissions->all();
             return view('admin.role.edit', compact('role', 'permissions'));
 
-        } catch (\Exception $e) {
-            return redirect()->back()->with(['error' => __('Something Went Wrong!')]);
-        }
+//        } catch (\Exception $e) {
+//            return redirect()->back()->with(['error' => __('Something Went Wrong!')]);
+//        }
     }
 
     public function delete($id)
     {
         try {
-            Role::find($id)->delete();
-            return redirect()->back()->with(['success' => __('Role Deleted Successfully')]);
+           $data= Role::find($id)->delete();
+            return response()->json($data);
 
         } catch (\Exception $e) {
             return redirect()->back()->with(['error' => __('Something Went Wrong!')]);

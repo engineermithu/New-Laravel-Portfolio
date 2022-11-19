@@ -55,5 +55,9 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::get('role-all',[RoleController::class,'show'])->name('show.role');
         Route::post('store-role', [RoleController::class, 'store'])->name('admin.store.role');
         Route::get('delete/roles/{id}', [RoleController::class, 'delete'])->name('admin.delete.role');
+        Route::get('edit-role/{id}', [RoleController::class, 'edit'])->name('admin.edit.role');
+        Route::put('update-role', [RoleController::class, 'update'])->name('admin.update.role');
+
+
     });
 //});

@@ -10,7 +10,7 @@
     <div id="app">
         <div class="main-wrapper main-wrapper-1">
             @include('admin.partials.header')
-            @include('admin.partials.sidebar')
+{{--            @include('admin.partials.sidebar')--}}
             <!-- Main Content -->
 {{--            <div class="content-wrapper">--}}
                 <div class="main-content">

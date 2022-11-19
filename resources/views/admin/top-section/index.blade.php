@@ -208,7 +208,6 @@
                                 }
 
                             })
-                            window.location.reload();
                         }
                         allTopContent();
 
