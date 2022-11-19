@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Repositories\Interfaces\Admin\RoleInterface;
 use App\Repositories\Interfaces\Admin\PermissionInterface;
 use App\Traits\SlugTrait;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -25,8 +26,9 @@ class RoleController extends Controller
     }
 
     public function index(){
-        $roles          = Role::all();
-        $permissions    = Permission::all();
+        $roles          = $this->roles->all()->get();
+//        dd($roles)
+        $permissions    = $this->permissions->all();
         return view('admin.role.index',compact('roles','permissions'));
     }
 
@@ -35,15 +37,28 @@ class RoleController extends Controller
         return view('admin.role.add', compact('permissions'));
     }
 
+    public function show(){
+
+        $data = Role::all();
+        return response()->json(['jnj'=>$data]);
+    }
+
     public function store(Request $request){
 //        dd($request->all());
 
-        if ($this->roles->store($request)):
-            return redirect('admin/roles')->with(['success' => __('Role Added Successfully')]);
-        else:
-            return back()->withInput()->with(['error' => __('Something Went Wrong!')]);
-        endif;
+        $data = $this->roles->store($request);
+//        return response()->json([$data]);
+        return redirect()->route('admin.roles')->with(['success'=> 'Role Added Successfully']);
+
+//        if ($this->roles->store($request)):
+//            return redirect('admin.roles')->throwResponse(['success' => __('Role Added Successfully')]);
+//        else:
+//            return back()->with(['error' => __('Something Went Wrong!')]);
+//        endif;
+
     }
+
+
     public function edit($id)
     {
         try {

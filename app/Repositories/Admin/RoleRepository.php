@@ -30,13 +30,14 @@ class RoleRepository implements RoleInterface
 
     public function store($request)
     {
-//        dd($request->all());
+//        dd($request->permissions);
 
         try {
             $role               = new Role();
             $role->name         = $request->name;
             $role->slug         = $this->getSlug($request->name, $request->slug);
-//            $role->permissions  = isset($request->permissions)? $request->permissions : [];
+            $role->permissions  = isset($request->permissions)?  json_encode($request->permissions ): [];
+//            dd($role);
 //
 //            foreach($request->permissions as $key => $p){
 //                $data = array(
@@ -57,7 +58,7 @@ class RoleRepository implements RoleInterface
 //                return redirect()->back()->with(['error' => 'Something Went Wrong!']);
 //            }
 
-            return false;
+//            return false;
 
         }
     }

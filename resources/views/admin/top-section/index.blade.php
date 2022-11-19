@@ -145,6 +145,7 @@
                 dataType: "json",
                 url: "/admin/top-section-all",
                 success: function (response){
+                    console.log(response)
                     var data = "";
                     $.each(response, function (key, value){
                         data = data +"<tr>"
@@ -174,6 +175,7 @@
                 }
             })
         }
+
         allTopContent();
         deleteTopContent()
 
@@ -202,11 +204,14 @@
                                         'Your file has been deleted.',
                                         'success'
                                     )
-                                }
-                            })
 
+                                }
+
+                            })
+                            window.location.reload();
                         }
                         allTopContent();
+
                     })
             }
         }
