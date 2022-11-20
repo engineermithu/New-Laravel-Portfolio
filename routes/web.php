@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TopSectionController;
+use App\Http\Controllers\Admin\StaffController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,6 +58,15 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::get('delete/roles/{id}', [RoleController::class, 'delete'])->name('admin.delete.role');
         Route::get('edit-role/{id}', [RoleController::class, 'edit'])->name('admin.edit.role');
         Route::put('update-role', [RoleController::class, 'update'])->name('admin.update.role');
+
+
+        Route::get('staffs', [StaffController::class, 'index'])->name('admin.staffs');
+        Route::get('create-staff', [StaffController::class, 'create'])->name('admin.staffs.create');
+        Route::post('create-staff', [StaffController::class, 'store'])->name('admin.staffs.store')->middleware('PermissionCheck:staff_create');
+//        Route::delete('delete/staff/{id}', [CommonController::class, 'delete'])->name('admin.staffs.delete')->middleware('PermissionCheck:staff_delete');
+//        Route::get('edit-staff/{id}', [StaffController::class, 'edit'])->name('admin.staffs.edit')->middleware('PermissionCheck:staff_update');
+//        Route::put('update-staff', [StaffController::class, 'update'])->name('admin.staffs.update')->middleware('PermissionCheck:staff_update');
+//        Route::get('change-role', [StaffController::class, 'changeRole'])->name('change.role');
 
 
     });

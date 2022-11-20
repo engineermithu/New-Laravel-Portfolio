@@ -111,8 +111,7 @@
 {{--                                        @endif--}}
                                         <tr>
                                             <td scope="row">{{ __('User Type') }}</td>
-                                            <th scope="col"
-                                                class="font-normal text-capitalize">{{ Sentinel::getUser()->user_type }}</th>
+                                            <th scope="col" class="font-normal text-capitalize">{{ Sentinel::getUser()->user_type }}</th>
                                         </tr>
                                         <tr>
                                             <td scope="row">{{ __('Last Password Change') }}</td>

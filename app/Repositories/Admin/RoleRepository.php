@@ -37,6 +37,7 @@ class RoleRepository implements RoleInterface
             $role->name         = $request->name;
             $role->slug         = $this->getSlug($request->name, $request->slug);
             $role->permissions  = isset($request->permissions)?  json_encode($request->permissions ): [];
+
 //            dd($role);
 //
 //            foreach($request->permissions as $key => $p){
@@ -51,14 +52,13 @@ class RoleRepository implements RoleInterface
 
 
         } catch (\Exception $e) {
-//
-//            if (($request->name == $role->name)) {
-//                return redirect()->back()->with(['error' => $role->name . ' ' . 'is already exit, plz try unique name']);
-//            } else {
-//                return redirect()->back()->with(['error' => 'Something Went Wrong!']);
-//            }
 
-//            return false;
+            if (($request->name == $role->name)) {
+                return redirect()->back()->with(['error' => $role->name . ' ' . 'is already exit, plz try unique name']);
+            } else {
+                return redirect()->back()->with(['error' => 'Something Went Wrong!']);
+            }
+
 
         }
     }

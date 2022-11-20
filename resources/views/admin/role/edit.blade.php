@@ -18,7 +18,7 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <div class="d-block">
-                                        <h2 class="section-title">{{ __('Edit Role') }}</h2>
+                                        <h4 class="section-title fw-bold text-primary">{{ __('Edit Role') }}</h4>
                                     </div>
                                     <div class="buttons add-button">
                                         <a href="{{ route('admin.roles') }}" class="btn btn-outline-primary"> <i
@@ -61,7 +61,7 @@
                                                 <table class="table table-striped role-create-table role-permission"
                                                        id="permissions-table">
                                                     <thead>
-                                                    <tr class="bg-secondary">
+                                                    <tr class="bg-info text-white">
                                                         <th scope="col">{{__('Module') }}/{{__('Sub-module') }}</th>
                                                         <th scope="col">{{__('Permissions') }}</th>
                                                     </tr>
@@ -75,6 +75,7 @@
                                                             </td>
                                                             <td>
                                                                 @foreach ($permission->keywords as $key => $keyword)
+{{--                                                                    {{dd($keyword)}}--}}
                                                                     <div class="custom-control custom-checkbox">
                                                                         @if ($keyword != '')
 
@@ -90,11 +91,9 @@
                                                                                        id="{{ $keyword }}"
                                                                                        name="permissions[]"
                                                                                        value="{{ $keyword }}"
-
-                                                                                >
-                                                                                {{--                                                                                {{ $role->permissions ? (in_array($keyword, $role->permissions) ? 'checked' : '') : '' }}>--}}
-                                                                                <label class="custom-control-label" style=""
-                                                                                       for="{{ $keyword }}">{{ __($key) }}</label>
+{{--                                                                            {{dd($role->permissions)}}--}}
+                                                                                {{ $role->permissions ? (in_array($keyword, json_decode($role->permissions , true)) ? 'checked' : '') : '' }}>
+                                                                                <label class="custom-control-label" style="" for="{{ $keyword }}">{{ __($key) }}</label>
                                                                             @endif
                                                                         @endif
                                                                     </div>

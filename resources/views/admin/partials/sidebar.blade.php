@@ -8,7 +8,7 @@
                      class="rounded-circle profile-widget-picture" width="45" />
             </div>
             <div class="admin-info">
-                <div class="font-strong">{{Sentinel::getUser()->first_name.' '.Sentinel::getUser()->last_name}}</div><small>Administrator</small></div>
+                <div class="font-strong">{{Sentinel::getUser()->first_name.' '.Sentinel::getUser()->last_name}}</div><small class="font-normal text-capitalize">{{Sentinel::getUser()->user_type}}</small></div>
         </div>
         <ul class="side-menu metismenu">
             <li>
@@ -40,7 +40,7 @@
                     <span class="nav-label">Editor</span><i class="fa fa-heading"></i></a>
                 <ul class="nav-2-level collapse">
                     <li>
-                        <a href="#">Manage</a>
+                        <a href="{{ route('admin.staffs') }}" class="nav-link">{{__('Manage Staff')}}</a>
                     </li>
                     <li class="@yield('roles')"><a class="nav-link" href="{{ route('admin.roles') }}"> {{ __('Roles') }}</a></li>
                 </ul>

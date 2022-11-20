@@ -18,7 +18,7 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <div class="d-block">
-                                        <h2 class="section-title">{{ __('Add Role') }}</h2>
+                                        <h4 class="section-title fw-bold text-primary">{{ __('Add Role') }}</h4>
                                     </div>
                                     <div class="buttons add-button">
                                         <a href="{{ route('admin.roles') }}" class="btn btn-outline-primary"><i class="fa fa-arrow-left"></i>{{__(' Back')}} </a>

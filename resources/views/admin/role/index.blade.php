@@ -12,24 +12,23 @@
         <div class="section-body">
             <div class="container">
                 <div class="row py-5">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-block">
-                            <h2 class="section-title">{{ __('Role') }}</h2>
-                            <p class="section-lead">
-                                {{ __('You have total') . ' ' . count(json_decode($roles)) . ' ' . __('User roles') }}
-                            </p>
-                        </div>
-                        {{--                        @if(hasPermission('role_create'))--}}
-                        <div class="buttons add-button">
-                            <a href="{{route('admin.create.role')}}" class="btn btn-outline-primary">
-                                <i class="fa fa-plus"></i>{{ __(' Add New Role') }}</a>
-                        </div>
-                        {{--                        @endif--}}
-                    </div>
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="text-dark"> {{__('Role Lists')}} </h4>
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-block">
+                                        <h4 class="section-title fw-bold text-primary">{{ __('Role List') }}</h4>
+                                        <p class="section-lead">
+                                            {{ __('You have total') . ' ' . count(json_decode($roles)) . ' ' . __('User roles') }}
+                                        </p>
+                                    </div>
+                                    {{--                        @if(hasPermission('role_create'))--}}
+                                    <div class="buttons add-button mt-3">
+                                        <a href="{{route('admin.create.role')}}" class="btn btn-outline-primary">
+                                            <i class="fa fa-plus"></i>{{ __(' Add New Role') }}</a>
+                                    </div>
+                                    {{--                        @endif--}}
+                                </div>
                             </div>
                             <div class="card-body p-0">
                                 <div class="table-responsive">
@@ -55,8 +54,7 @@
                                                         @endphp
                                                         <label class="label "><span class="btn btn-outline-success btn-circle">{{ count($rolePermisions) }}</span></label>
                                                     @else
-                                                        <label class="label label-default"><span
-                                                                class="text-warning fst-normal">{{ __('No Permission') }}</span></label>
+                                                        <label class="label label-default"><span class="text-warning fw-bold">{{ __('No Permission') }}</span></label>
                                                     @endif
                                                 </td>
                                                 <td>{{$role->created_at->diffForHumans()}}</td>
