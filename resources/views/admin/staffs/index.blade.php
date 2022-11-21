@@ -15,33 +15,43 @@
             <div class="container py-5">
                 <div class="row">
                     <div class="col-12 col-md-12 col-lg-12">
+                        <div class="d-flex justify-content-between">
+
+                            <div class="">
+                                <div class="card-header-form mt-2">
+
+                                    <h4 class="section-title fw-bold text-primary mt-2">{{ __('Staff Lists') }}</h4>
+                                    <p class="section-lead">
+                                        {{ __('You have total') . ' ' . 'bn' . ' ' . __('User roles') }}
+                                        {{--                                            {{ __('You have total') . ' ' . count(json_decode($roles)) . ' ' . __('User roles') }}--}}
+                                    </p>
+                                </div>
+
+
+                            </div>
+
+                            {{--                                                   @if(hasPermission('staff_create'))--}}
+                            <div class="buttons add-button">
+                                <a href="{{route('admin.staffs.create')}}" class="btn btn-outline-primary">
+                                    <i class="fa fa-plus"></i>{{ __(' Add New Staff ') }}</a>
+                            </div>
+                            {{--                                    @endif--}}
+                        </div>
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title"> {{__('Staff Lists')}} </h4>
-                                <div class="card-header-form">
-                                    <form class="form-inline" id="sorting">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="q" value="{{ @$q }}"
-                                                   placeholder="{{ __('Search') }}">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-outline-primary"><i class="fa fa-search"></i>
-                                                </button>
+                                <div class="justify-content-between">
+                                    <h4 class="card-title"> {{__('Staff Lists')}} </h4>
+                                    <div class="card-header-form">
+                                        <form class="form-inline" id="sorting">
+                                            <div class="input-group">
+                                                <input type="search" class="form-control" name="q" value="{{ @$q }}"
+                                                       placeholder="{{ __('Search') }}">
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-block">
-                                        <p class="section-lead">
-{{--                                                                    {{ __('You have total') . ' ' . $staffs->total() . ' ' . __('Staffs') }}--}}
-                                        </p>
+                                        </form>
                                     </div>
-{{--                                                   @if(hasPermission('staff_create'))--}}
-                                    <div class="buttons add-button">
-                                        <a href="" class="btn btn-outline-primary"></a><a href="{{route('admin.staffs.create')}}" class="btn btn-outline-primary">
-                                            <i class="fa fa-plus"></i>{{ __('Add New Staff ') }}</a>
-                                    </div>
-{{--                                    @endif--}}
                                 </div>
                             </div>
                             <div class="card-body p-0">

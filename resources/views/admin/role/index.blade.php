@@ -13,22 +13,25 @@
             <div class="container">
                 <div class="row py-5">
                     <div class="col-12 col-md-12 col-lg-12">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-block">
+                                <h4 class="section-title fw-bold text-primary mt-2">{{ __('Staff Roles') }}</h4>
+                                <p class="section-lead">
+                                    {{ __('You have total') . ' ' . count(json_decode($roles)) . ' ' . __('User roles') }}
+                                </p>
+
+                            </div>
+
+                            {{--                        @if(hasPermission('role_create'))--}}
+                            <div class="buttons add-button mt-3">
+                                <a href="{{route('admin.create.role')}}" class="btn btn-outline-primary">
+                                    <i class="fa fa-plus"></i>{{ __(' Add New Role') }}</a>
+                            </div>
+                            {{--                        @endif--}}
+                        </div>
                         <div class="card">
                             <div class="card-header">
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-block">
-                                        <h4 class="section-title fw-bold text-primary">{{ __('Role List') }}</h4>
-                                        <p class="section-lead">
-                                            {{ __('You have total') . ' ' . count(json_decode($roles)) . ' ' . __('User roles') }}
-                                        </p>
-                                    </div>
-                                    {{--                        @if(hasPermission('role_create'))--}}
-                                    <div class="buttons add-button mt-3">
-                                        <a href="{{route('admin.create.role')}}" class="btn btn-outline-primary">
-                                            <i class="fa fa-plus"></i>{{ __(' Add New Role') }}</a>
-                                    </div>
-                                    {{--                        @endif--}}
-                                </div>
+                                <h6 class="">Role Lists</h6>
                             </div>
                             <div class="card-body p-0">
                                 <div class="table-responsive">

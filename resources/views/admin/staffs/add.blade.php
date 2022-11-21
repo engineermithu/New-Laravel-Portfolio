@@ -11,19 +11,22 @@
 @section('content')
     <section class="section">
         <div class="section-body">
-            <div class="d-flex justify-content-between">
-                <div class="d-block">
-                    <h2 class="section-title">{{ __('Add Staff') }}</h2>
-                </div>
-                <div class="buttons add-button">
-                    <a href="{{ route('admin.staffs') }}" class="btn btn-outline-primary"> <i
-                            class='bx bx-arrow-back'></i>{{__('Back')}} </a>
-                </div>
-            </div>
+
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="card">
+                        <div class="card mt-5">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-block mt-3">
+                                        <h5 class="section-title fw-bold text-primary">{{ __('Add Staff') }}</h5>
+                                    </div>
+                                    <div class="buttons add-button">
+                                        <a href="{{ route('admin.staffs') }}" class="btn btn-outline-primary"> <i
+                                                class='fa fa-arrow-left'></i>{{__(' Back')}} </a>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <form action="{{route('admin.staffs.store')}}" enctype="multipart/form-data" method="POST">
                                     @csrf
@@ -123,20 +126,46 @@
                                                 <label for="customFile">{{__('Profile Image')}}</label>
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input image_pick" id="customFile"
-                                                           data-image-for="profile" name="image" accept="image/*"/>
-                                                    <label class="custom-file-label"
-                                                           for="customFile">{{__(' Choose image...')}}</label>
-                                                    @if($errors->has('image'))
-                                                        <div class="text text-danger mr-5">
-                                                            {{$errors->first('image')}}
-                                                        </div>
-                                                    @endif
+                                                           data-image-for="profile" name="image" accept="image/*" />
+                                                    <label class="custom-file-label" for="customFile"> {{__("Choose image...")}}</label>
+                                                    {{--                                @if($errors->has('image'))--}}
+                                                    {{--                                    <div class="text text-danger mr-5">--}}
+                                                    {{--                                        {{$errors->first('image')}}--}}
+                                                    {{--                                    </div>--}}
+                                                    {{--                                @endif--}}
+                                                    @error('image')
+                                                    <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                             </div>
-                                            <div class="form-group mt-4 text-left">
-                                                <img src="{{asset('images/default/user.png')}}"
-                                                     alt="Not Found!" id="img_profile" class="img-thumbnail user-profile"/>
-                                            </div>
+                                            @if(Sentinel::getUser()->image !== '' && (Sentinel::getUser()->image))
+                                                <div class="form-group mt-4 text-left">
+                                                    <img src="{{asset('images/'.Sentinel::getUser()->image) }}"
+                                                         alt="" id="img_profile" class="img-thumbnail user-profile" height="128" width="128" />
+                                                </div>
+                                            @else
+                                                <div class="form-group mt-4 text-left">
+                                                    <img src="{{asset('images/user.jpg')}}" alt="" id="img_profile" class="img-thumbnail user-profile" height="128" width="128"/>
+                                                </div>
+                                            @endif
+{{--                                            <div class="form-group">--}}
+{{--                                                <label for="customFile">{{__('Profile Image')}}</label>--}}
+{{--                                                <div class="custom-file">--}}
+{{--                                                    <input type="file" class="custom-file-input image_pick" id="customFile"--}}
+{{--                                                           data-image-for="profile" name="image" accept="image/*"/>--}}
+{{--                                                    <label class="custom-file-label"--}}
+{{--                                                           for="customFile">{{__(' Choose image...')}}</label>--}}
+{{--                                                    @if($errors->has('image'))--}}
+{{--                                                        <div class="text text-danger mr-5">--}}
+{{--                                                            {{$errors->first('image')}}--}}
+{{--                                                        </div>--}}
+{{--                                                    @endif--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="form-group mt-4 text-left">--}}
+{{--                                                <img src="{{asset('images/default/user.png')}}"--}}
+{{--                                                     alt="Not Found!" id="img_profile" class="img-thumbnail user-profile"/>--}}
+{{--                                            </div>--}}
                                         </div>
                                         <div class="col-md-7 col-sm-12 col-lg-7 ">
                                             <div class="form-group">
@@ -144,8 +173,7 @@
                                                 <select class="form-control change-role selectric" id="role" name="role">
                                                     <option selected disabled> {{__('Select Role')}} </option>
                                                     @foreach($roles as $value)
-                                                        <option
-                                                            value="{{ $value->id }}" {{ old('role') == $value->id ? 'selected' : (@$user->role_id == $value->id ? 'selected' : '') }}>
+                                                        <option value="{{ $value->id }}" {{ old('role') == $value->id ? 'selected' : (@$user->role_id == $value->id ? 'selected' : '') }}>
                                                             {{ $value->name }}
                                                         </option>
                                                     @endforeach
@@ -160,7 +188,7 @@
                                                 <table class="table table-striped role-create-table role-permission"
                                                        id="permissions-table">
                                                     <thead>
-                                                    <tr>
+                                                    <tr class="bg-info  text-white">
                                                         <th scope="col">{{__('Module') }}/{{__('Sub-module') }}</th>
                                                         <th scope="col">{{__('Permissions') }}</th>
                                                     </tr>
@@ -217,4 +245,28 @@
             </div>
         </div>
     </section>
+@endsection
+@section('font-js')
+    <script>
+        function readURL(input, image_for) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#img_' + image_for).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function updateProfile(){
+            alert("dgfdg")
+        }
+
+        jQuery(function ($){
+            $(".image_pick").on("change", function () {
+                var image_for = $(this).attr('data-image-for');
+                readURL(this, image_for);
+            });
+        })
+    </script>
 @endsection
