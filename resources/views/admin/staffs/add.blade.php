@@ -11,7 +11,6 @@
 @section('content')
     <section class="section">
         <div class="section-body">
-
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -34,45 +33,37 @@
                                     <div class="row">
                                         <div class="col-md-5 col-sm-12 col-lg-5">
                                             <div class="form-group">
-                                                <label for="first_name"> {{__('First Name')}} *</label>
+                                                <label for="first_name"> {{__('First Name')}} <span class="text-danger">*</span></label>
                                                 <input type="text" name="first_name" value="{{old('first_name')}}" id="first_name" class="form-control"
                                                        placeholder="{{__('Enter First Name')}}" required />
-                                                @if($errors->has('first_name'))
-                                                    <div class="text text-danger">
-                                                        {{$errors->first('first_name')}}
-                                                    </div>
-                                                @endif
+                                                @error('first_name')
+                                                <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="last_name"> {{__('Last Name')}} *</label>
+                                                <label for="last_name"> {{__('Last Name')}} <span class="text-danger">*</span></label>
                                                 <input type="text" name="last_name" value="{{old('last_name')}}" id="last_name"
                                                        class="form-control" placeholder="{{__('Enter Last Name')}}"
                                                        required/>
-                                                @if($errors->has('last_name'))
-                                                    <div class="text text-danger">
-                                                        {{$errors->first('last_name')}}
-                                                    </div>
-                                                @endif
+                                                @error('last_name')
+                                                <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="phone"> {{__('Phone')}} </label>
                                                 <input type="tel" name="phone" value="{{old('phone')}}" id="phone"
                                                        class="form-control" placeholder="{{__('Enter Phone')}}" />
-                                                @if($errors->has('phone'))
-                                                    <div class="text text-danger">
-                                                        {{$errors->first('phone')}}
-                                                    </div>
-                                                @endif
+                                                @error('phone')
+                                                <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="date_of_birth"> {{__('Date of Birth')}} </label>
                                                 <input type="date" name="date_of_birth" id="date_of_birth" value="{{old('date_of_birth')}}"
                                                        class="form-control"/>
-                                                @if($errors->has('date_of_birth'))
-                                                    <div class="text text-danger">
-                                                        {{$errors->first('date_of_birth')}}
-                                                    </div>
-                                                @endif
+                                                @error('date')
+                                                <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="gender"> {{__('Gender')}} </label>
@@ -86,11 +77,9 @@
                                                     <input class="form-check-input ml-4" type="radio" name="gender" id="gender" value="0" />
                                                     <label class="form-check-label ml-5" for="gender_rather_not_say"> {{__('Rather not say')}}</label>
                                                 </div>
-                                                @if($errors->has('gender'))
-                                                    <div class="text text-danger">
-                                                        {{$errors->first('gender')}}
-                                                    </div>
-                                                @endif
+                                                @error('gender')
+                                                <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             {{--                                        <div class="form-group">--}}
                                             {{--                                            <label for="username"> {{__('Username')}} *</label>--}}
@@ -103,24 +92,20 @@
                                             {{--                                            @endif--}}
                                             {{--                                        </div>--}}
                                             <div class="form-group">
-                                                <label for="email"> {{__('Email')}} *</label>
+                                                <label for="email"> {{__('Email')}} <span class="text-danger">*</span></label>
                                                 <input type="email" name="email" id="email" value="{{old('email')}}"
                                                        class="form-control" placeholder="{{__('Enter Email')}}" required>
-                                                @if($errors->has('email'))
-                                                    <div class="text text-danger">
-                                                        {{$errors->first('email')}}
-                                                    </div>
-                                                @endif
+                                                @error('email')
+                                                <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="password"> {{__('Password')}} * </label>
+                                                <label for="password"> {{__('Password')}}<span class="text-danger"> *</span> </label>
                                                 <input type="password" id="password" name="password" value="{{old('password')}}"
                                                        class="form-control" placeholder="{{__('Enter Password')}}" required>
-                                                @if($errors->has('password'))
-                                                    <div class="text text-danger">
-                                                        {{$errors->first('password')}}
-                                                    </div>
-                                                @endif
+                                                @error('password')
+                                                <span class="text-danger" style="font-size: 11.5px;">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="customFile">{{__('Profile Image')}}</label>
