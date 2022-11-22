@@ -24,7 +24,7 @@ class StaffStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name'    => 'required|max:50|regex:/^[a-zA-Z\s]*$/',
+            'first_name'    => 'required|max:50|regex:/^[a-zA-Z\s.]*$/',
             'last_name'     => 'required|max:50|regex:/^[a-zA-Z\s]*$/',
             'phone'         => 'nullable|min:8',
             'date_of_birth' => 'nullable',

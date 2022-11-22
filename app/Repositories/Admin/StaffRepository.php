@@ -5,6 +5,7 @@ namespace App\Repositories\Admin;
 use App\Models\User;
 use App\Repositories\Interfaces\Admin\StaffInterface;
 use http\Env\Request;
+use Cartalyst\Sentinel\Laravel\Facades\Activation;
 
 class StaffRepository implements StaffInterface
 {
@@ -12,9 +13,9 @@ class StaffRepository implements StaffInterface
     {
 //        dd($request->all());
         $imageName = '';
-        if($image = $request->file('image')){
-            $imageName = time().'-'.uniqid().'.'. $image->getClientOriginalExtension();
-            $image->move('images/',$imageName);
+        if ($image = $request->file('image')) {
+            $imageName = time() . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move('images/', $imageName);
 //            $student_image->move('../../../../../images/students',$imageName);
 
         }
@@ -33,7 +34,11 @@ class StaffRepository implements StaffInterface
             $staff->role_id         = $request->role != '' ? $request->role : null;
             $staff->image           = $imageName;
             $staff->save();
-        }catch (\Exception $e){
+
+//            $activation = Activation::create($staff);
+//            Activation::complete($staff, $activation->code);
+
+        } catch (\Exception $e) {
             echo $e;
         }
     }

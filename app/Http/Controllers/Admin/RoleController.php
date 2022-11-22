@@ -29,7 +29,7 @@ class RoleController extends Controller
         $roles          = $this->roles->all()->get();
 //        dd($roles)
         $permissions    = $this->permissions->all();
-        return view('admin.role.index',compact('roles','permissions'));
+        return view('admin.role.index', compact('roles', 'permissions'));
     }
 
     public function create(){
