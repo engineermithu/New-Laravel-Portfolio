@@ -43,3 +43,10 @@ if (!function_exists('is_file_exists')) {
         return false;
     }
 }
+if (!function_exists('get_system_config')) {
+
+    function get_system_config($config_for)
+    {
+        return \Config::get('system_config.' . $config_for);
+    }
+}

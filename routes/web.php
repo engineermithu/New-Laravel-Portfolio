@@ -65,7 +65,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::post('create-staff',[StaffController::class,'store'])->name('admin.staffs.store');
 //        Route::delete('delete/staff/{id}', [CommonController::class, 'delete'])->name('admin.staffs.delete')->middleware('PermissionCheck:staff_delete');
         Route::get('edit-staff/{id}', [StaffController::class, 'edit'])->name('admin.staffs.edit');
-        Route::put('update-staff', [StaffController::class, 'update'])->name('admin.staffs.update');
+        Route::post('update-staff/{id}', [StaffController::class, 'update'])->name('admin.staffs.update');
         Route::get('delete-staff/{id}', [StaffController::class, 'destroy'])->name('admin.staffs.delete');
         Route::get('change-role', [StaffController::class, 'changeRole'])->name('change.role');
 

@@ -22,11 +22,9 @@
 
                                     <h4 class="section-title fw-bold text-primary mt-2">{{ __('Staff Lists') }}</h4>
                                     <p class="section-lead">
-                                        {{ __('You have total') . ' ' . count(json_decode($staffs)) . ' ' . __('User roles') }}
+                                        {{ __('You have total') . ' ' . count($staffs) . ' ' . __('User roles') }}
                                     </p>
                                 </div>
-
-
                             </div>
 
                             {{--                                                   @if(hasPermission('staff_create'))--}}
@@ -39,8 +37,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="justify-content-between">
-                                    <h4 class="card-title"> {{__('Staff Lists')}} </h4>
-                                    <div class="card-header-form">
+                                    <div class="card-header-form align-right">
                                         <form class="form-inline" id="sorting">
                                             <div class="input-group">
                                                 <input type="search" class="form-control" name="q" value="{{ @$q }}"
@@ -74,15 +71,20 @@
                                                                                 <td>{{ $loop->iteration }}</td>
                                                                                 <td width="300">
                                                                                     <div class="d-flex">
-{{--                                                                                        <figure class="avatar mr-2">--}}
-{{--                                                                                            <img src="{{ get_image($staff->id,'user_image') }}"--}}
-{{--                                                                                                 alt="Not Found!">--}}
-{{--                                                                                            @if(\Illuminate\Support\Facades\Cache::has('user-is-online-' . $staff->id))--}}
-{{--                                                                                                <i class="avatar-presence online"></i>--}}
-{{--                                                                                            @else--}}
-{{--                                                                                                <i class="avatar-presence offline"></i>--}}
-{{--                                                                                            @endif--}}
-{{--                                                                                        </figure>--}}
+                                                                                        <figure class="avatar mr-2">
+{{--                                                                                            <img src="{{asset('images/'.$staff->image)}}"--}}
+{{--                                                                                                 class="rounded-circle profile-widget-picture" width="45" />--}}
+
+                                                                                            <img src="{{$staff->image != null? asset('images/'.$staff->image) : asset('/images/user.jpg')}}"
+                                                                                                 class="rounded-circle profile-widget-picture" width="45" />
+
+
+                                                                                            @if(\Illuminate\Support\Facades\Cache::has('user-is-online-' . $staff->id))
+                                                                                                <i class="avatar-presence online"></i>
+                                                                                            @else
+                                                                                                <i class="avatar-presence offline"></i>
+                                                                                            @endif
+                                                                                        </figure>
                                                                                         <div class="ml-1">
                                                                                             {{ $staff->first_name . ' ' . $staff->last_name }}<br/>
 {{--                                                                                            <i class='bx bx-check-circle--}}
