@@ -25,7 +25,7 @@ class RoleUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|max:20|regex:/^[a-zA-Z\s.]*$/',
-            'slug' => 'nullable|max:20|regex:/^[a-z\s]*$/',
+            'slug' => 'nullable|max:20|',
         ];
     }
 }

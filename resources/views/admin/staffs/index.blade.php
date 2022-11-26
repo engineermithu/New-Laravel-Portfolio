@@ -27,12 +27,12 @@
                                 </div>
                             </div>
 
-                            {{--                                                   @if(hasPermission('staff_create'))--}}
+{{--                            @if(hasPermission('staff_create'))--}}
                             <div class="buttons add-button">
                                 <a href="{{route('admin.staffs.create')}}" class="btn btn-outline-primary">
                                     <i class="fa fa-plus"></i>{{ __(' Add New Staff ') }}</a>
                             </div>
-                            {{--                                    @endif--}}
+{{--                            @endif--}}
                         </div>
                         <div class="card">
                             <div class="card-header">

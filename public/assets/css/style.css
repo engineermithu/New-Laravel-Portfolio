@@ -118,8 +118,10 @@ li.nav-item-menu:hover::before {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 609px;
-    width: 1263px;
+    /*height: 609px;*/
+    /*width: 1263px;*/
+    height: 100%;
+    width: 100%;
     position: relative;
     z-index: 0;
 
@@ -325,7 +327,7 @@ nav.main-menu ul li a:after{
 }
 /*
 ==========================================
-    Services Css
+    Services CSS
 ==========================================
 */
 .services{

@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\LoginCheckMiddleware;
 use App\Http\Middleware\LogoutCheckMiddleware;
+use App\Http\Middleware\PermissionCheckerMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -68,5 +69,6 @@ class Kernel extends HttpKernel
 
         'loginCheck'                => LoginCheckMiddleware::class,
         'logoutCheck'               => LogoutCheckMiddleware::class,
+        'PermissionCheck'           => PermissionCheckerMiddleware::class,
     ];
 }

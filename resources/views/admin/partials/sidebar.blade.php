@@ -42,7 +42,9 @@
                     <li>
                         <a href="{{ route('admin.staffs') }}" class="nav-link">{{__('Manage Staff')}}</a>
                     </li>
+{{--                    @if(hasPermission('role_read'))--}}
                     <li class="@yield('roles')"><a class="nav-link" href="{{ route('admin.roles') }}"> {{ __('Roles') }}</a></li>
+{{--                    @endif--}}
                 </ul>
             </li>
 

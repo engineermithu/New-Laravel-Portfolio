@@ -51,22 +51,22 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
             Route::post('/section-top-update/{id_protfolio}', 'updated')->name('update.top.section');
 
         });
-        Route::get('roles', [RoleController::class, 'index'])->name('admin.roles');
-        Route::get('create-role', [RoleController::class, 'create'])->name('admin.create.role');
+        Route::get('roles', [RoleController::class, 'index'])->name('admin.roles')->middleware('PermissionCheck:role_read');
+        Route::get('create-role', [RoleController::class, 'create'])->name('admin.create.role')->middleware('PermissionCheck:role_create');
         Route::get('role-all',[RoleController::class,'show'])->name('show.role');
-        Route::post('store-role', [RoleController::class, 'store'])->name('admin.store.role');
-        Route::get('delete/roles/{id}', [RoleController::class, 'delete'])->name('admin.delete.role');
-        Route::get('edit-role/{id}', [RoleController::class, 'edit'])->name('admin.edit.role');
-        Route::put('update-role', [RoleController::class, 'update'])->name('admin.update.role');
+        Route::post('store-role', [RoleController::class, 'store'])->name('admin.store.role')->middleware('PermissionCheck:role_create');
+        Route::get('delete/roles/{id}', [RoleController::class, 'delete'])->name('admin.delete.role')->middleware('PermissionCheck:role_delete');
+        Route::get('edit-role/{id}', [RoleController::class, 'edit'])->name('admin.edit.role')->middleware('PermissionCheck:role_update');
+        Route::put('update-role', [RoleController::class, 'update'])->name('admin.update.role')->middleware('PermissionCheck:role_update');
 
 
-        Route::get('staffs',[StaffController::class, 'index'])->name('admin.staffs');
-        Route::get('create-staff',[StaffController::class,'create'])->name('admin.staffs.create');
-        Route::post('create-staff',[StaffController::class,'store'])->name('admin.staffs.store');
+        Route::get('staffs',[StaffController::class, 'index'])->name('admin.staffs')->middleware('PermissionCheck:staff_read');
+        Route::get('create-staff',[StaffController::class,'create'])->name('admin.staffs.create')->middleware('PermissionCheck:staff_create');
+        Route::post('create-store',[StaffController::class,'store'])->name('admin.staffs.store')->middleware('PermissionCheck:staff_create');
 //        Route::delete('delete/staff/{id}', [CommonController::class, 'delete'])->name('admin.staffs.delete')->middleware('PermissionCheck:staff_delete');
-        Route::get('edit-staff/{id}', [StaffController::class, 'edit'])->name('admin.staffs.edit');
-        Route::post('update-staff/{id}', [StaffController::class, 'update'])->name('admin.staffs.update');
-        Route::get('delete-staff/{id}', [StaffController::class, 'destroy'])->name('admin.staffs.delete');
+        Route::get('edit-staff/{id}', [StaffController::class, 'edit'])->name('admin.staffs.edit')->middleware('PermissionCheck:staff_update');
+        Route::post('update-staff/{id}', [StaffController::class, 'update'])->name('admin.staffs.update')->middleware('PermissionCheck:staff_update');
+        Route::get('delete-staff/{id}', [StaffController::class, 'destroy'])->name('admin.staffs.delete')->middleware('PermissionCheck:staff_delete');
         Route::get('change-role', [StaffController::class, 'changeRole'])->name('change.role');
 
 

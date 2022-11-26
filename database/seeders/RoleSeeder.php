@@ -17,19 +17,19 @@ class RoleSeeder extends Seeder
     public function run()
     {
         Role::create([
-            'name'          => 'Editor',
-            'slug'          => 'editor',
-            'permissions'   => json_encode($this->staffPermissions())
+            'name'          => 'Manager',
+            'slug'          => 'manager',
+            'permissions'   => json_encode($this->permissions())
         ]);
     }
 
-    private function staffPermissions(){
+    private function permissions(){
 
         return [
-            'editor_create',
-            'editor_read',
-            'editor_update',
-            'editor_delete',
+            'staff_create',
+            'staff_read',
+            'staff_update',
+            'staff_delete',
 
             'top_section_create',
             'top_section_read',

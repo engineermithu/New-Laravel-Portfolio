@@ -18,11 +18,11 @@ class PermissionSeeder extends Seeder
     {
         $attributes = [
 
-            'editor' => [
-                'create'    => 'editor_create',
-                'read'      => 'editor_read',
-                'update'    => 'editor_update',
-                'delete'    => 'editor_delete'
+            'staff' => [
+                'create'    => 'staff_create',
+                'read'      => 'staff_read',
+                'update'    => 'staff_update',
+                'delete'    => 'staff_delete'
             ],
 
             'top section' => [

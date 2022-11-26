@@ -7,6 +7,7 @@ use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 use GeoSot\EnvEditor\Facades\EnvEditor;
+use Sentinel;
 
 
 
@@ -48,5 +49,15 @@ if (!function_exists('get_system_config')) {
     function get_system_config($config_for)
     {
         return \Config::get('system_config.' . $config_for);
+    }
+}
+if (!function_exists('hasPermission')) {
+
+    function hasPermission($key_word)
+    {
+        if (in_array($key_word, Sentinel::getUser()->permissions)) {
+            return true;
+        }
+        return false;
     }
 }

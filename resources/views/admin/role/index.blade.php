@@ -22,12 +22,12 @@
 
                             </div>
 
-                            {{--                        @if(hasPermission('role_create'))--}}
+{{--                                                    @if(hasPermission('role_create'))--}}
                             <div class="buttons add-button mt-3">
                                 <a href="{{route('admin.create.role')}}" class="btn btn-outline-primary">
                                     <i class="fa fa-plus"></i>{{ __(' Add New Role') }}</a>
                             </div>
-                            {{--                        @endif--}}
+{{--                                                    @endif--}}
                         </div>
                         <div class="card">
                             <div class="card-header">
