@@ -35,13 +35,14 @@ class StaffController extends Controller
     }
 
 
-    public function create()
+    public function create(Request $request)
     {
 //        $roles          = $this->roles->all()->get();
 //        $permissions    = $this->permissions->all();
-
-        $roles          = Role::all();
-        $permissions    = Permission::all();
+//
+//        $user      = $this->staff->paginate($request,get_system_config('paginate'));
+        $roles          = $this->roles->all()->get();
+        $permissions    = $this->permissions->all();
         return view('admin.staffs.add', compact('roles', 'permissions'));
     }
 

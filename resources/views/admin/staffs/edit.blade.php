@@ -162,10 +162,11 @@
                                             <div class="form-group">
                                                 <label for="role">{{ __('Role') }}</label>
                                                 <select class="form-control change-role selectric" id="role" name="role">
-                                                    <option value="">{{ __('Select') }} {{ __('Role') }}</option>
+                                                    <option selected disabled>{{ __('Select') }} {{ __('Role') }}</option>
                                                     @foreach ($roles as $role)
-                                                        <option
-                                                            value="{{ $role->id }}" {{ old('role') == $role->id ? 'selected' : ($user->role_id == $role->id ? 'selected' : '') }}>{{ $role->name }}</option>
+                                                        @if($role->slug  != 'manager')
+                                                        <option value="{{ $role->id }}" {{ old('role') == $role->id ? 'selected' : (@$user->role_id == $role->id ? 'selected' : '') }}>{{ $role->name }}</option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -233,4 +234,28 @@
             </div>
         </div>
     </section>
+@endsection
+@section('font-js')
+    <script>
+        function readURL(input, image_for) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#img_' + image_for).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function updateProfile(){
+            alert("dgfdg")
+        }
+
+        jQuery(function ($){
+            $(".image_pick").on("change", function () {
+                var image_for = $(this).attr('data-image-for');
+                readURL(this, image_for);
+            });
+        })
+    </script>
 @endsection

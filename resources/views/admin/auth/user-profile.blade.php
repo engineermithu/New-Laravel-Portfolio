@@ -125,7 +125,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="card-footer"><h3 class="text-white">Footer</h3></div>
+{{--                            <div class="card-footer"><h3 class="text-white">Footer</h3></div>--}}
                         </div>
                     </div>
                 </div>

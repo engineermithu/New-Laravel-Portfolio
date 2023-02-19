@@ -102,22 +102,6 @@
             }
         })
 
-        // $(document).on("click", ".delete-btn", function () {
-        //     let roleId = $(this).val();
-        //     $.ajax({
-        //         type: "GET",
-        //         dataType: "json",
-        //         url: "/admin/delete/roles/" + roleId,
-        //         success: function (res) {
-        //             alert(res);
-        //             toastr.success('Data Added Successfully');
-        //             $('.role-row-'+roleId).remove();
-        //         }
-        //     })
-        // });
-
-
-
         function deleteRole(id){
 
             if(id){

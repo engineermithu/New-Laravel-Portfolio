@@ -158,9 +158,11 @@
                                                 <select class="form-control change-role selectric" id="role" name="role">
                                                     <option selected disabled> {{__('Select Role')}} </option>
                                                     @foreach($roles as $value)
+                                                        @if($value->slug  != 'manager')
                                                         <option value="{{ $value->id }}" {{ old('role') == $value->id ? 'selected' : (@$user->role_id == $value->id ? 'selected' : '') }}>
                                                             {{ $value->name }}
                                                         </option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                                 @if($errors->has('role'))

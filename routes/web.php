@@ -46,7 +46,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
             Route::get('/top-section','index')->name('top.section');
             Route::post('/section-top-store','store')->name('store.top.section');
             Route::get('/top-section-all','show')->name('show.top.section');
-            Route::delete('/section-top-destroy/{id}','destroy')->name('destroy.top.section');
+            Route::get('/section-top-destroy/{id}','destroy')->name('destroy.top.section');
             Route::get('/top-section-edit/{id}','edit')->name('edit.top.section');
             Route::post('/section-top-update/{id_protfolio}', 'updated')->name('update.top.section');
 

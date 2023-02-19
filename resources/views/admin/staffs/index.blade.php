@@ -120,17 +120,30 @@
 {{--                                                                                    @if(hasPermission('staff_update'))--}}
                                                                                         <a href="{{route('admin.staffs.edit',['id'=> $staff->id])}}"
                                                                                            class="btn btn-outline-warning btn-circle "
-{{--                                                                                           class="btn btn-outline-warning btn-round {{ hasPermission('staff_update') ? '' : 'cursor-not-allowed' }}"--}}
+                                                                                           class="btn btn-outline-warning btn-round "
                                                                                            data-toggle="tooltip" title="" data-original-title="{{__('Edit') }}">
                                                                                             <i class='fa fa-edit mt-1'></i>
                                                                                         </a>
+{{--                                                                                    <button--}}
+{{--                                                                                        class="btn btn-outline-warning btn-circle delete-btn"--}}
+{{--                                                                                        data-toggle="tooltip" value="{{$staff->id}}" onclick="editRole({{$staff->id}})"--}}
+{{--                                                                                        title="Delete" data-original-title="{{ __('Edit') }}"><i--}}
+{{--                                                                                            class='fa fa-edit mt-1'></i>--}}
+{{--                                                                                    </button>--}}
 {{--                                                                                    @endif--}}
+
 {{--                                                                                    @if(hasPermission('staff_delete'))--}}
-                                                                                        <a href="{{route('admin.staffs.delete',['id'=> $staff->id])}}"
-                                                                                           class="btn  btn-outline-danger btn-circle" data-toggle="tooltip"
-                                                                                           title=""
-                                                                                           data-original-title="{{ __('Delete') }}"><i class='fa fa-trash'></i>
-                                                                                        </a>
+{{--                                                                                        <a href="{{route('admin.staffs.delete',['id'=> $staff->id])}}"--}}
+{{--                                                                                           class="btn  btn-outline-danger btn-circle" data-toggle="tooltip"--}}
+{{--                                                                                           title=""--}}
+{{--                                                                                           data-original-title="{{ __('Delete') }}"><i class='fa fa-trash'></i>--}}
+{{--                                                                                        </a>--}}
+                                                                                    <button
+                                                                                        class="btn btn-outline-danger btn-circle delete-btn"
+                                                                                        data-toggle="tooltip" value="{{$staff->id}}" onclick="deleteRole({{$staff->id}})"
+                                                                                        title="Delete" data-original-title="{{ __('Delete') }}"><i
+                                                                                            class='fa fa-trash mt-1'></i>
+                                                                                    </button>
 {{--                                                                                    @endif--}}
                                                                                 </td>
                                                                             </tr>
@@ -150,4 +163,54 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('font-js')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
+
+
+        function deleteRole(id){
+            if(id){
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                type: "get",
+                                dataType: "json",
+                                url: "/admin/delete-staff/"+id,
+                                success: function (data){
+                                    Swal.fire(
+                                        'Deleted!',
+                                        'Your file has been deleted.',
+                                        'success'
+                                    )
+
+                                }
+
+                            })
+                            window.location.reload()
+                        }
+                    })
+            }
+        }
+
+        function editRole(id){
+            alert(id)
+        }
+
+
+    </script>
 @endsection

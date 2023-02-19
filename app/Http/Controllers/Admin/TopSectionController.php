@@ -19,7 +19,8 @@ class TopSectionController extends Controller
 
     public function index()
     {
-        return view('admin.top-section.index');
+        $top_sections = $this->top_section->show();
+        return view('admin.top-section.index',compact('top_sections'));
     }
 
 
@@ -39,8 +40,10 @@ class TopSectionController extends Controller
 
     public function show()
     {
-        $data = $this->top_section->show();
-        return response()->json($data);
+        $top_sections = $this->top_section->show();
+//        dd($top_sections);
+        return view('admin.top-section.index',compact('top_sections'));
+//        return response()->json($data);
     }
 
 
@@ -49,8 +52,8 @@ class TopSectionController extends Controller
 
         $data = $this->top_section->edit($id);
 
-        return response()->json(['data'=>$data]);
-//           return view('admin.top-section.index',compact('data'));
+//        return response()->json(['data'=>$data]);
+           return view('admin.top-section.index',compact('data'));
 //        return view('admin.top-section.index',['data' =>TopSection::find($id)]);
     }
 
@@ -65,6 +68,6 @@ class TopSectionController extends Controller
     public function destroy($id)
     {
         $data = $this->top_section->destroy($id);
-        return response()->json($data);
+        return redirect()->route('top.section')->with(['status'=>'success']);
     }
 }

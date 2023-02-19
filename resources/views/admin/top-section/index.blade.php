@@ -28,9 +28,28 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-
+                                        @foreach($top_sections as $value)
+                                            <tr>
+                                                <td>{{$loop->iteration}}</td>
+                                                <td>{{$value->title_one}}</td>
+                                                <td>{{$value->title_two}}</td>
+                                                <td>{{$value->description}}</td>
+                                                <td>{{$value->status}}</td>
+                                                <td>
+                                                    <button class='btn btn-outline-success rounded-circle m-1' onclick='editTopContent({{$value->id}})'><i class='fa fa-edit'></i> </button>
+                                                    <a href="{{route('destroy.top.section',$value->id)}}" class='btn btn-outline-danger rounded-circle m-1'><i class='fa fa-trash'></i> </a>
+{{--                                                    <button class='btn btn-outline-success rounded-circle m-1' onclick='editTopContent({{$value->id}})'><i class='fa fa-edit'></i> </button>--}}
+{{--                                                    <button class='btn btn-outline-danger rounded-circle m-1' onclick='deleteTopContent({{$value->id}})'><i class='fa fa-trash'></i> </button>--}}
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="card-footer">
+                                <nav class="d-inline-block">
+{{--                                    {{ $data->appends(Request::except('page'))->links('pagination::bootstrap-4') }}--}}
+                                </nav>
                             </div>
                         </div>
                     </div>
@@ -146,32 +165,32 @@
                 url: "/admin/top-section-all",
                 success: function (response){
                     console.log(response)
-                    var data = "";
-                    $.each(response, function (key, value){
-                        data = data +"<tr>"
-                        data = data + "<td>"+value.id+"</td>"
-                        data = data + "<td>"+value.title_one+"</td>"
-                        data = data + "<td>"+value.title_two+"</td>"
-                        data = data + "<td>"+value.description+"</td>"
-                        data = data + "<td>"+value.status+"</td>"
+                    // var data = "";
+                    // $.each(response, function (key, value){
+                    //     data = data +"<tr>"
+                    //     data = data + "<td>"+value.id+"</td>"
+                    //     data = data + "<td>"+value.title_one+"</td>"
+                    //     data = data + "<td>"+value.title_two+"</td>"
+                    //     data = data + "<td>"+value.description+"</td>"
+                    //     data = data + "<td>"+value.status+"</td>"
+                    // //     data = data + "<td>"
+                    // //        " <label class="switch switch-status">
+                    // //         <input type="checkbox" class="status" id="31" checked="">
+                    // //         <span class="slider round"></span>
+                    // // </label>
+                    // //     <input type="checkbox" class="status" id="31" checked="">
+                    // //         <span class="slider round"></span>
+                    // //     </label>"
+                    // //         // +value.status+
+                    // //
+                    // //         "</td>"
                     //     data = data + "<td>"
-                    //        " <label class="switch switch-status">
-                    //         <input type="checkbox" class="status" id="31" checked="">
-                    //         <span class="slider round"></span>
-                    // </label>
-                    //     <input type="checkbox" class="status" id="31" checked="">
-                    //         <span class="slider round"></span>
-                    //     </label>"
-                    //         // +value.status+
-                    //
-                    //         "</td>"
-                        data = data + "<td>"
-                        data = data + "<button class='btn btn-outline-success rounded-circle m-1' onclick='editTopContent("+value.id+")'><i class='fa fa-edit'></i> </button>"
-                        data = data + "<button class='btn btn-outline-danger rounded-circle m-1' onclick='deleteTopContent("+value.id+")'><i class='fa fa-trash'></i> </button>"
-                        data = data + "</td>"
-                        data = data +"</tr>"
-                    })
-                    $('tbody').html(data)
+                    //     data = data + "<button class='btn btn-outline-success rounded-circle m-1' onclick='editTopContent("+value.id+")'><i class='fa fa-edit'></i> </button>"
+                    //     data = data + "<button class='btn btn-outline-danger rounded-circle m-1' onclick='deleteTopContent("+value.id+")'><i class='fa fa-trash'></i> </button>"
+                    //     data = data + "</td>"
+                    //     data = data +"</tr>"
+                    // })
+                    // $('tbody').html(data)
                 }
             })
         }
@@ -181,7 +200,6 @@
 
 
         function deleteTopContent(id){
-
             if(id){
                 Swal.fire({
                     title: 'Are you sure?',
@@ -204,13 +222,10 @@
                                         'Your file has been deleted.',
                                         'success'
                                     )
-
                                 }
-
                             })
                         }
                         allTopContent();
-
                     })
             }
         }
@@ -235,7 +250,7 @@
         }
 
         function updateData(){
-            var id   = $('#id').val();
+            var id           = $('#id').val();
             var title_one    = $('#title_one').val();
             var title_two    = $('#title_two').val();
             var description  = $('#description').val();
