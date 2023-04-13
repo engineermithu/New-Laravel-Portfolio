@@ -1,11 +1,12 @@
 <?php
 namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Cartalyst\Sentinel\Users\EloquentUser;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable{
+class User extends EloquentUser{
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [

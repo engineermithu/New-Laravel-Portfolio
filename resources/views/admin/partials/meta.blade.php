@@ -3,3 +3,4 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <meta name="msapplication-TileImage" content="{{ asset('/') }}assets/images/favicon/cropped-favicon-270x270.png" />
+

@@ -29,6 +29,7 @@ class MigrationCartalystSentinel extends Migration
      *
      * @return void
      */
+    
     public function up()
     {
         Schema::create('activations', function (Blueprint $table) {
@@ -51,6 +52,8 @@ class MigrationCartalystSentinel extends Migration
             $table->engine = 'InnoDB';
             $table->unique('code');
         });
+
+
 
         Schema::create('reminders', function (Blueprint $table) {
             $table->increments('id');

@@ -3,11 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
-use  Cartalyst\Sentinel\Users\UserInterface;
+use Cartalyst\Sentinel\Users\UserInterface;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Sentinel;
+
 class UserSeeder extends Seeder{
 
     public function run(){

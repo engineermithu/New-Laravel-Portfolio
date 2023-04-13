@@ -175,7 +175,7 @@
                                                 <table class="table table-striped role-create-table role-permission"
                                                        id="permissions-table">
                                                     <thead>
-                                                    <tr class="bg-info  text-white">
+                                                    <tr class="bg-dark  text-white">
                                                         <th scope="col">{{__('Module') }}/{{__('Sub-module') }}</th>
                                                         <th scope="col">{{__('Permissions') }}</th>
                                                     </tr>

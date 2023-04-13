@@ -35,6 +35,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::controller(DashboardController::class)->group(function (){
             Route::get('/dashboard',  'index')->name('dashboard');
         });
+        
         Route::controller(UserController::class)->group(function (){
             Route::get('/profile',  'userProfile')->name('profile');
             Route::get('/change-password',  'changePassword')->name('change.password');
@@ -51,6 +52,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
             Route::post('/section-top-update/{id_protfolio}', 'updated')->name('update.top.section');
 
         });
+
         Route::get('roles', [RoleController::class, 'index'])->name('admin.roles')->middleware('PermissionCheck:role_read');
         Route::get('create-role', [RoleController::class, 'create'])->name('admin.create.role')->middleware('PermissionCheck:role_create');
         Route::get('role-all',[RoleController::class,'show'])->name('show.role');

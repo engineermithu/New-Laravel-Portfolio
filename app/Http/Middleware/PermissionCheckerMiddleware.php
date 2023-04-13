@@ -21,7 +21,7 @@ class PermissionCheckerMiddleware
 //        return $next($request);
 
         if (Sentinel::check()):
-            if (in_array( $permission , Sentinel::getUser()->permissions)):
+            if (in_array($permission , Sentinel::getUser()->permissions)):
                 return $next($request);
             endif;
             abort(403);
